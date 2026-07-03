@@ -1,4 +1,5 @@
 import styles from './alerts.module.css'
+import { WEATHER_LOCATIONS, getWeatherEmoji } from '@/lib/weather'
 
 interface WeatherData {
   location: { name: string; county: string; waterway: string }
@@ -16,34 +17,60 @@ interface WeatherData {
 
 async function fetchWeatherData(): Promise<WeatherData[]> {
   try {
-    let url = '/api/weather'
+    const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY
 
-    // On Vercel, use the full URL with the Vercel domain
-    if (process.env.VERCEL === '1') {
-      url = `https://${process.env.VERCEL_URL || 'fwsc.vercel.app'}/api/weather`
+    if (!apiKey) {
+      console.error('[Alerts] Weather API key not configured')
+      return []
     }
 
-    console.log('[Alerts] Fetching weather from:', url)
+    const weatherPromises = WEATHER_LOCATIONS.map(async (location) => {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=imperial`,
+          { next: { revalidate: 60 } }
+        )
 
-    const response = await fetch(url, {
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+        if (!response.ok) {
+          console.error(`[Alerts] Weather API error for ${location.name}: ${response.status}`)
+          return null
+        }
+
+        const data = await response.json()
+
+        // Determine alert status
+        const condition = data.weather[0].main.toLowerCase()
+        const windSpeed = data.wind.speed
+        let alertType: 'caution' | 'warning' | undefined
+
+        if (windSpeed > 25) alertType = 'caution'
+        if (windSpeed > 35) alertType = 'warning'
+        if (['thunderstorm', 'tornado', 'hurricane'].some(c => condition.includes(c))) alertType = 'warning'
+        if (['rain', 'drizzle', 'mist'].some(c => condition.includes(c))) alertType = 'caution'
+
+        return {
+          location,
+          temp: Math.round(data.main.temp),
+          feelsLike: Math.round(data.main.feels_like),
+          condition: data.weather[0].main,
+          windSpeed: Math.round(data.wind.speed),
+          windGust: data.wind.gust ? Math.round(data.wind.gust) : undefined,
+          humidity: data.main.humidity,
+          icon: data.weather[0].icon,
+          alert: !!alertType,
+          alertType,
+          emoji: getWeatherEmoji(data.weather[0].icon),
+        }
+      } catch (error) {
+        console.error(`[Alerts] Error fetching weather for ${location.name}:`, error)
+        return null
+      }
     })
 
-    console.log('[Alerts] Response received:', response.status)
+    const results = await Promise.all(weatherPromises)
+    const weatherData = results.filter((w) => w !== null)
 
-    if (!response.ok) {
-      const text = await response.text()
-      console.error('[Alerts] API error:', response.status, text.substring(0, 200))
-      throw new Error(`API error: ${response.status}`)
-    }
-
-    const data = await response.json()
-    console.log('[Alerts] Weather data:', Array.isArray(data) ? `${data.length} items` : 'invalid format')
-
-    return Array.isArray(data) ? data : []
+    return weatherData
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     console.error('[Alerts] Fetch failed:', message)
