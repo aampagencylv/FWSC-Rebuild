@@ -1,7 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from '@/components/CheckoutForm'
 import styles from './membership.module.css'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -67,8 +69,7 @@ export default function Membership() {
     cardName: '',
     cardZip: '',
   })
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [showPayment, setShowPayment] = useState(false)
 
   const tier = TIERS.find(t => t.id === selectedTier)!
   const total = tier.price + APP_FEE
@@ -89,45 +90,29 @@ export default function Membership() {
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleContinueToPayment = (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
-    setIsLoading(true)
-
-    try {
-      // Create checkout session
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tier: selectedTier,
-          email: formData.contactEmail,
-          company: formData.businessName,
-        }),
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Failed to create checkout session')
-      }
-
-      const { sessionId } = await response.json()
-
-      // Redirect to Stripe checkout
-      const stripe = await stripePromise
-      if (!stripe) throw new Error('Stripe failed to load')
-
-      const result = await stripe.redirectToCheckout({ sessionId })
-      if (result.error) {
-        throw new Error(result.error.message)
-      }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'An error occurred'
-      setError(message)
-      console.error('Checkout error:', err)
-    } finally {
-      setIsLoading(false)
+    // Validate required fields
+    if (!formData.businessName || !formData.county || !formData.fleetSize ||
+        !formData.insuranceCarrier || !formData.policyNumber ||
+        !formData.contactName || !formData.contactEmail) {
+      alert('Please fill in all required fields')
+      return
     }
+    setShowPayment(true)
+  }
+
+  if (showPayment) {
+    return (
+      <Elements stripe={stripePromise}>
+        <CheckoutForm
+          formData={formData}
+          tier={tier}
+          total={total}
+          onBack={() => setShowPayment(false)}
+        />
+      </Elements>
+    )
   }
 
   return (
@@ -177,7 +162,7 @@ export default function Membership() {
         </div>
 
         {/* Form + Order Summary */}
-        <form onSubmit={handleSubmit} className={styles.formLayout}>
+        <form onSubmit={handleContinueToPayment} className={styles.formLayout}>
           {/* Business Details */}
           <div className={styles.card}>
             <h3>Business Details</h3>
@@ -301,49 +286,6 @@ export default function Membership() {
             </div>
           </div>
 
-          {/* Payment Card */}
-          <div className={styles.card}>
-            <h3>Billing Information</h3>
-            {error && (
-              <div style={{
-                padding: '12px',
-                marginBottom: '16px',
-                backgroundColor: '#fee',
-                border: '1px solid #fcc',
-                borderRadius: '4px',
-                color: '#c33',
-                fontSize: '14px'
-              }}>
-                {error}
-              </div>
-            )}
-            <div className={styles.formGrid}>
-              <div className={`${styles.field} ${styles.fullWidth}`}>
-                <label htmlFor="cardName">Billing contact*</label>
-                <input
-                  id="cardName"
-                  name="cardName"
-                  type="text"
-                  value={formData.cardName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className={`${styles.field} ${styles.fullWidth}`}>
-                <label htmlFor="cardZip">Billing ZIP*</label>
-                <input
-                  id="cardZip"
-                  name="cardZip"
-                  type="text"
-                  value={formData.cardZip}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Order Summary Sidebar */}
           <aside className={styles.orderSummary}>
             <h3 className={styles.summaryTitle}>Order summary</h3>
@@ -366,8 +308,8 @@ export default function Membership() {
               <span>${total}</span>
             </div>
 
-            <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-              {isLoading ? 'Processing...' : 'Pay and submit application'}
+            <button type="submit" className={styles.submitBtn}>
+              Continue to payment
             </button>
 
             <p className={styles.finePrint}>
