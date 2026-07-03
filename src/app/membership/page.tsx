@@ -240,9 +240,12 @@ export default function Membership() {
           {/* Payment Card */}
           <div className={styles.card}>
             <h3>Payment Information</h3>
+            <p style={{ fontSize: '13px', color: 'var(--ink-600, #4A5265)', margin: '0 0 16px 0' }}>
+              Stripe checkout will be integrated here. For now, this application will be reviewed and processed manually.
+            </p>
             <div className={styles.formGrid}>
               <div className={`${styles.field} ${styles.fullWidth}`}>
-                <label htmlFor="cardName">Name on card*</label>
+                <label htmlFor="cardName">Billing contact*</label>
                 <input
                   id="cardName"
                   name="cardName"
@@ -254,45 +257,6 @@ export default function Membership() {
               </div>
 
               <div className={`${styles.field} ${styles.fullWidth}`}>
-                <label htmlFor="cardNumber">Card number*</label>
-                <input
-                  id="cardNumber"
-                  name="cardNumber"
-                  type="text"
-                  placeholder="0000 0000 0000 0000"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="cardExpiry">Expiration*</label>
-                <input
-                  id="cardExpiry"
-                  name="cardExpiry"
-                  type="text"
-                  placeholder="MM / YY"
-                  value={formData.cardExpiry}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="cardCVC">CVC*</label>
-                <input
-                  id="cardCVC"
-                  name="cardCVC"
-                  type="text"
-                  placeholder="000"
-                  value={formData.cardCVC}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.field}>
                 <label htmlFor="cardZip">Billing ZIP*</label>
                 <input
                   id="cardZip"

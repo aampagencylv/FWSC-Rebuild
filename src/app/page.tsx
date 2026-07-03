@@ -40,8 +40,8 @@ export default function Home() {
 
         <div className={styles.gridCards}>
           <div className={styles.card}>
-            <h3>Insurance Partnerships</h3>
-            <p>Access preferred rates and coverage options designed for certified water-sport liveries.</p>
+            <h3>Insurance and Platform Partnerships</h3>
+            <p>Access preferred rates and coverage options, plus partnership benefits from leading platforms and agencies.</p>
           </div>
           <div className={styles.card}>
             <h3>FWC Coordination</h3>
@@ -58,19 +58,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Path to certification */}
+      {/* Where your money goes */}
       <section className={styles.pathToCert}>
         <div className={styles.sectionRule}>
-          <p className={styles.eyebrow}>How it works</p>
-          <h2>Path to Certification</h2>
+          <p className={styles.eyebrow}>Transparency</p>
+          <h2>Where Your Money Goes</h2>
         </div>
 
         <div className={styles.stepsGrid}>
           {[1, 2, 3, 4].map(step => (
             <div key={step} className={styles.stepCard}>
               <div className={styles.stepNumber}>{step}</div>
-              <h3>{['Apply', 'Safety Audit', 'Staff Training', 'Certified'][step - 1]}</h3>
-              <p>{['Submit your application and review the safety framework', 'We audit your vessels and operations', 'Complete required staff training modules', 'Join the Coalition and use the mark'][step - 1]}</p>
+              <h3>{['Lobbying and Advocacy', 'Insurance Partnerships', 'Coalition Operations', 'Safety Initiatives'][step - 1]}</h3>
+              <p>{['Government advocacy for waterway safety policy and regulatory standards', 'Negotiated rates and coverage options for Coalition members', 'Administration, member directory, and partnership coordination', 'Safety training, framework development, and public education programs'][step - 1]}</p>
             </div>
           ))}
         </div>
