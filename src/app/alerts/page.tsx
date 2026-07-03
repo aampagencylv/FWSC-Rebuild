@@ -16,12 +16,20 @@ interface WeatherData {
 
 async function fetchWeatherData(): Promise<WeatherData[]> {
   try {
-    // Use relative URL for server-side fetch
-    const response = await fetch('/api/weather', {
+    let url = '/api/weather'
+
+    // On Vercel, use the full URL with the Vercel domain
+    if (process.env.VERCEL === '1' && process.env.VERCEL_URL) {
+      url = `https://${process.env.VERCEL_URL}/api/weather`
+    }
+
+    const response = await fetch(url, {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
       },
+      // Add timeout
+      signal: AbortSignal.timeout(5000),
     })
 
     if (!response.ok) {
@@ -30,16 +38,17 @@ async function fetchWeatherData(): Promise<WeatherData[]> {
     }
 
     const data = await response.json()
-    console.log('[Alerts] Weather data received:', data?.length || 0, 'locations')
+    console.log('[Alerts] Weather data received:', Array.isArray(data) ? data.length : 'invalid', 'items')
 
     if (!Array.isArray(data)) {
-      console.error('[Alerts] Invalid data format:', typeof data)
+      console.error('[Alerts] Invalid data format, expected array')
       return []
     }
 
     return data
   } catch (error) {
-    console.error('[Alerts] Failed to fetch weather:', error instanceof Error ? error.message : error)
+    const message = error instanceof Error ? error.message : String(error)
+    console.error('[Alerts] Weather fetch failed:', message)
     return []
   }
 }
