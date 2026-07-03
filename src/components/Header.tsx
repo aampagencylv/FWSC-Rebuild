@@ -6,6 +6,7 @@ import styles from './Header.module.css'
 
 const navigation = [
   { href: '/', label: 'Home' },
+  { href: '/alerts', label: 'Weather Alerts' },
   { href: '/safety-framework', label: 'Safety Framework' },
   { href: '/partnerships', label: 'Partnerships' },
   { href: '/directory', label: 'Member Directory' },
