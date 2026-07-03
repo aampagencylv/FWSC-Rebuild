@@ -20,17 +20,26 @@ async function fetchWeatherData(): Promise<WeatherData[]> {
       ? `https://${process.env.VERCEL_URL}`
       : 'http://localhost:3000'
 
-    const response = await fetch(`${baseUrl}/api/weather`, {
+    const url = `${baseUrl}/api/weather`
+    console.log('[Alerts Page] Fetching from:', url)
+
+    const response = await fetch(url, {
       cache: 'no-store'
     })
 
+    console.log('[Alerts Page] Response status:', response.status)
+
     if (!response.ok) {
+      const errorText = await response.text()
+      console.error('[Alerts Page] Error response:', errorText)
       throw new Error(`API error: ${response.status}`)
     }
 
-    return await response.json()
+    const data = await response.json()
+    console.log('[Alerts Page] Weather data received:', data.length, 'locations')
+    return data
   } catch (error) {
-    console.error('Failed to fetch weather:', error)
+    console.error('[Alerts Page] Failed to fetch weather:', error)
     return []
   }
 }
