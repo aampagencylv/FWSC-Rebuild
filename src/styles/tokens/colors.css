@@ -1,0 +1,74 @@
+/* FWSC color system — drawn from the coalition seal */
+:root {
+  /* Base — navy (seal field) */
+  --navy-900: #0E1A34;
+  --navy-800: #14264E;  /* primary brand navy */
+  --navy-700: #1D3463;
+  --navy-600: #2A4478;
+  --navy-500: #3B5691;
+  --navy-100: #DCE3EF;
+  --navy-050: #EEF2F8;
+
+  /* Base — gold (rope ring & lettering band) */
+  --gold-700: #8A6A1F;
+  --gold-600: #B08A2E;
+  --gold-500: #C9A23E;  /* primary brand gold */
+  --gold-400: #E3BE6A;
+  --gold-200: #F0DDAB;
+  --gold-100: #F8EFD6;
+
+  /* Base — parchment / neutrals */
+  --parchment-100: #FAF6EC; /* page background */
+  --parchment-200: #F3ECDB;
+  --white: #FFFFFF;
+  --ink-900: #1A2030;   /* near-black text */
+  --ink-600: #4A5265;
+  --ink-400: #7C8496;
+  --line-300: #D8D3C4;  /* hairline on parchment */
+  --line-200: #E6E2D6;
+
+  /* Base — seal interior accents */
+  --water-500: #4E7FBE; /* seal sky/water blue */
+  --water-100: #E3ECF7;
+  --palm-600: #2E6B44;  /* palm green */
+  --palm-100: #E2EFE7;
+  --brick-600: #8C3B2E; /* seal inscription red */
+  --brick-100: #F5E4E0;
+
+  /* Semantic — text */
+  --text-heading: var(--navy-800);
+  --text-body: var(--ink-900);
+  --text-muted: var(--ink-600);
+  --text-on-navy: #F5EFDF;
+  --text-link: var(--water-500);
+
+  /* Semantic — surfaces */
+  --surface-page: var(--parchment-100);
+  --surface-card: var(--white);
+  --surface-raised: var(--parchment-200);
+  --surface-navy: var(--navy-800);
+  --surface-input: var(--white);
+
+  /* Semantic — interactive */
+  --action-primary: var(--navy-800);
+  --action-primary-hover: var(--navy-700);
+  --action-primary-active: var(--navy-900);
+  --action-accent: var(--gold-500);
+  --action-accent-hover: var(--gold-600);
+  --focus-ring: var(--gold-500);
+
+  /* Semantic — status (safety signaling) */
+  --status-danger: #A6321F;
+  --status-danger-bg: #F7E5E1;
+  --status-caution: #9A6B10;
+  --status-caution-bg: #FBF0D4;
+  --status-clear: #1F6B3E;
+  --status-clear-bg: #E1F0E7;
+  --status-info: #2A5C9E;
+  --status-info-bg: #E2ECF8;
+
+  /* Semantic — lines */
+  --border-strong: var(--navy-800);
+  --border-default: var(--line-300);
+  --border-gold: var(--gold-500);
+}

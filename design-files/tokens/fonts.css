@@ -1,0 +1,6 @@
+/* FWSC webfonts — no brand font binaries were provided.
+   Google Fonts substitutions (flagged in readme.md):
+   - Marcellus         → Roman-inscription caps for seals/mastheads (single 400 weight)
+   - Libre Caslon Text → Caslon, the typeface of founding documents — headings & long-form
+   - Public Sans       → U.S. government UI sans for body & controls */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');

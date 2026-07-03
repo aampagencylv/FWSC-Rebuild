@@ -1,0 +1,137 @@
+.noticeBand {
+  background-color: var(--navy-900, #0E1A34);
+  color: var(--gold-400, #E3BE6A);
+  padding: 7px 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.noticeBand p {
+  margin: 0;
+}
+
+.masthead {
+  background-color: var(--navy-800, #14264E);
+  border-bottom: 3px solid var(--gold-500, #C9A23E);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  position: relative;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.seal {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display, 'Marcellus', serif);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #F5EFDF;
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-400, #E3BE6A);
+  line-height: 1;
+}
+
+.nav {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  margin-left: 16px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #C8D2E4;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 140ms ease-out;
+}
+
+.navItem:hover {
+  background-color: var(--navy-700, #1D3463);
+  color: white;
+}
+
+.navItem.active {
+  background-color: var(--navy-700, #1D3463);
+  color: white;
+  font-weight: 600;
+  border-bottom: 2px solid var(--gold-500, #C9A23E);
+  padding-bottom: 8px;
+}
+
+.cta {
+  background-color: var(--gold-500, #C9A23E);
+  color: var(--navy-900, #0E1A34);
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 140ms ease-out;
+  flex-shrink: 0;
+}
+
+.cta:hover {
+  background-color: var(--gold-600, #B89130);
+  text-decoration: none;
+}
+
+.cta:active {
+  background-color: var(--gold-700, #A67E28);
+}
+
+@media (max-width: 768px) {
+  .masthead {
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .nav {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .navItem {
+    flex: 1;
+    justify-content: center;
+  }
+}

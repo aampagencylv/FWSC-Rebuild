@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&amp;family=Shantell+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0eee9;font-family:'Shantell Sans',system-ui,sans-serif}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+/* wireframe helpers */
+.wf{font-family:'Shantell Sans',sans-serif;color:#26282b;font-size:11px;line-height:1.35}
+.wf-box{border:1.5px solid #9aa0a6;border-radius:3px;background:#fff}
+.wf-fill{background:repeating-linear-gradient(45deg,#f2f3f4,#f2f3f4 6px,#e8eaec 6px,#e8eaec 12px);border:1.5px solid #b7bcc2;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#7d838a;font-size:10px}
+.wf-note{font-family:'Patrick Hand',cursive;color:#b4531f;font-size:12px;line-height:1.25}
+.wf-eyebrow{font-size:8.5px;letter-spacing:.14em;color:#14264E;font-weight:600}
+.wf-h{font-weight:600;color:#14264E}
+.wf-btn{display:inline-block;border:1.5px solid #14264E;background:#14264E;color:#fff;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:600}
+.wf-btn2{display:inline-block;border:1.5px solid #14264E;background:#fff;color:#14264E;border-radius:3px;padding:4px 10px;font-size:10px;font-weight:600}
+.wf-rule{height:0;border-top:2.5px solid #C9A23E;border-bottom:1px solid #C9A23E;margin:2px 0}
+.wf-nav{display:flex;align-items:center;gap:10px;background:#14264E;color:#fff;padding:8px 12px;font-size:9.5px}
+.wf-seal{width:20px;height:20px;border-radius:50%;border:1.5px solid #C9A23E;background:#1d3260;flex:none;display:flex;align-items:center;justify-content:center;color:#C9A23E;font-size:8px}
+.wf-tag{display:inline-block;border:1px solid #9aa0a6;border-radius:999px;padding:1px 7px;font-size:8.5px;color:#555}
+.wf-adv{display:flex;gap:8px;align-items:center;background:#FDF3E0;border:1.5px solid #C9A23E;border-radius:3px;padding:6px 8px;font-size:9.5px}
+.wf-sec{padding:12px;display:flex;flex-direction:column;gap:8px}
+.wf-grid{display:grid;gap:8px}
+.wf-muted{color:#6d7278;font-size:9.5px}
+</style>
+</helmet>
+
+<section class="dv-turn wf" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Member directory + sign-up with tiers &amp; checkout (building on <a class="dv-oid" href="#1b">1b</a>)</span></div>
+  <div class="dv-opts">
+
+    <!-- 2a: Directory — list + filters -->
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Member directory — filter rail + list (registry style)</div>
+      <div class="dv-card" style="width:420px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">MEMBER DIRECTORY</div>
+          <div class="wf-h" style="font-size:15px">Certified Operators of the Coalition</div>
+          <div class="wf-muted">Every listing is a member in good standing. Verified insurance and safety certification.</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec" style="flex-direction:row;gap:10px;align-items:flex-start">
+          <div class="wf-box" style="width:100px;padding:8px;flex:none;display:flex;flex-direction:column;gap:6px">
+            <div class="wf-eyebrow">FILTERS</div>
+            <div class="wf-fill" style="height:18px">County ▾</div>
+            <div class="wf-fill" style="height:18px">Waterway ▾</div>
+            <div class="wf-fill" style="height:18px">Vessel type ▾</div>
+            <div class="wf-muted">☐ Jet ski<br>☐ Pontoon<br>☐ Kayak/SUP<br>☐ Charter</div>
+            <div class="wf-fill" style="height:18px">Cert level ▾</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div class="wf-fill" style="height:20px">Search operators…</div>
+            <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:40px;height:40px;flex:none">logo</div><div style="flex:1"><b>Operator name</b> <span class="wf-tag" style="border-color:#C9A23E;color:#8a6a1e">Certified · Level II</span><div class="wf-muted">Pinellas County · Tampa Bay · Pontoon, jet ski</div><div class="wf-muted"><u>View profile</u> · member since 2024</div></div></div>
+            <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:40px;height:40px;flex:none">logo</div><div style="flex:1"><b>Operator name</b> <span class="wf-tag" style="border-color:#C9A23E;color:#8a6a1e">Certified · Level I</span><div class="wf-muted">Monroe County · Key Largo · Kayak, charter</div></div></div>
+            <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:40px;height:40px;flex:none">logo</div><div style="flex:1"><b>Operator name</b> <span class="wf-tag">Member — cert pending</span><div class="wf-muted">Lee County · Caloosahatchee</div></div></div>
+            <div class="wf-muted" style="text-align:center">‹ 1 2 3 … 12 ›</div>
+          </div>
+        </div>
+        <div class="wf-sec" style="background:#FAF6EC;flex-direction:row;align-items:center"><div><b>Operate a livery?</b><div class="wf-muted">Get listed by joining the coalition.</div></div><span class="wf-btn" style="margin-left:auto">Join</span></div>
+      </div>
+      <div class="wf-note">→ Registry feel; cert-level badge is the trust signal. Same row pattern powers a public + member view.</div>
+    </div>
+
+    <!-- 2b: Directory — map first -->
+    <div class="dv-opt" id="2b">
+      <div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Member directory — map first (find near a waterway)</div>
+      <div class="dv-card" style="width:420px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="flex-direction:row;gap:0;padding:0">
+          <div class="wf-fill" style="flex:1;height:220px;border:none;border-right:1.5px solid #b7bcc2;border-radius:0">Florida map<br>· pins = certified operators<br>· click pin → card</div>
+          <div style="width:150px;flex:none;display:flex;flex-direction:column;gap:6px;padding:8px">
+            <div class="wf-fill" style="height:18px">Search county…</div>
+            <div class="wf-box" style="padding:6px"><b style="font-size:9.5px">Operator name</b><div class="wf-muted">Certified II · Tampa Bay</div></div>
+            <div class="wf-box" style="padding:6px"><b style="font-size:9.5px">Operator name</b><div class="wf-muted">Certified I · Clearwater</div></div>
+            <div class="wf-box" style="padding:6px"><b style="font-size:9.5px">Operator name</b><div class="wf-muted">Certified II · St. Pete</div></div>
+            <div class="wf-muted"><u>List view →</u></div>
+          </div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">SELECTED OPERATOR</div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:48px;height:48px;flex:none">logo</div><div><b>Operator name</b> <span class="wf-tag" style="border-color:#C9A23E;color:#8a6a1e">Certified · Level II</span><div class="wf-muted">Address · phone · vessels · <u>website</u></div><div class="wf-muted">Insurance verified · last audit: 2026</div></div></div>
+        </div>
+      </div>
+      <div class="wf-note">→ Best if public discovery matters; heavier build (map component) — flag for Claude Code.</div>
+    </div>
+
+    <!-- 2c: Sign-up — tiers then checkout, one page -->
+    <div class="dv-opt" id="2c">
+      <div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Sign-up — tiers + checkout on one page</div>
+      <div class="dv-card" style="width:420px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">MEMBERSHIP</div>
+          <div class="wf-h" style="font-size:15px">Choose Your Membership</div>
+          <div class="wf-muted">Annual dues scale by fleet size. All tiers include the certification path.</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="wf-box" style="padding:8px"><div class="wf-eyebrow">SKIPPER</div><b style="font-size:13px">$—/yr</b><div class="wf-muted">1–5 vessels<br>· Directory listing<br>· Framework access<br>· Advocacy voice</div><span class="wf-btn2" style="margin-top:6px">Select</span></div>
+            <div class="wf-box" style="padding:8px;border:2px solid #C9A23E;position:relative"><span class="wf-tag" style="position:absolute;top:-8px;right:6px;background:#C9A23E;border-color:#C9A23E;color:#14264E">Most common</span><div class="wf-eyebrow">FLEET</div><b style="font-size:13px">$—/yr</b><div class="wf-muted">6–25 vessels<br>· Everything in Skipper<br>· Insurance partner rates<br>· Staff training seats</div><span class="wf-btn" style="margin-top:6px">Select</span></div>
+            <div class="wf-box" style="padding:8px"><div class="wf-eyebrow">HARBOR</div><b style="font-size:13px">$—/yr</b><div class="wf-muted">26+ vessels / multi-site<br>· Everything in Fleet<br>· FWC liaison priority<br>· Board eligibility</div><span class="wf-btn2" style="margin-top:6px">Select</span></div>
+          </div>
+        </div>
+        <div class="wf-sec" style="flex-direction:row;gap:10px;align-items:flex-start">
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div class="wf-eyebrow">BUSINESS DETAILS</div>
+            <div class="wf-fill" style="height:18px">Business name</div>
+            <div class="wf-fill" style="height:18px">County / waterway</div>
+            <div class="wf-fill" style="height:18px">Fleet size & vessel types</div>
+            <div class="wf-fill" style="height:18px">Insurance carrier & policy #</div>
+            <div class="wf-eyebrow" style="margin-top:4px">PAYMENT</div>
+            <div class="wf-fill" style="height:18px">Card number</div>
+            <div style="display:flex;gap:6px"><div class="wf-fill" style="height:18px;flex:1">MM/YY</div><div class="wf-fill" style="height:18px;flex:1">CVC</div><div class="wf-fill" style="height:18px;flex:1">ZIP</div></div>
+          </div>
+          <div class="wf-box" style="width:130px;padding:8px;flex:none">
+            <div class="wf-eyebrow">ORDER SUMMARY</div>
+            <div class="wf-muted">Fleet membership<br>$—/yr<br>Application fee $—</div>
+            <div class="wf-rule" style="margin:6px 0"></div>
+            <b>Total: $—</b>
+            <span class="wf-btn" style="margin-top:6px;display:block;text-align:center">Pay &amp; submit</span>
+            <div class="wf-muted" style="margin-top:4px">Membership pending safety audit. Refunded if not approved.</div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-note">→ Single scroll: pick tier → form → pay. Fastest to build; fine if tiers are simple.</div>
+    </div>
+
+    <!-- 2d: Sign-up — stepper flow -->
+    <div class="dv-opt" id="2d">
+      <div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Sign-up — 3-step wizard (tier → details → checkout)</div>
+      <div class="dv-card" style="width:420px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC;flex-direction:row;align-items:center;gap:6px;font-size:9.5px">
+          <span class="wf-btn" style="border-radius:999px;padding:2px 8px">1 Tier</span>—<span class="wf-btn2" style="border-radius:999px;padding:2px 8px">2 Details</span>—<span class="wf-btn2" style="border-radius:999px;padding:2px 8px">3 Payment</span>
+          <span class="wf-muted" style="margin-left:auto">Step 1 of 3</span>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-h">Which tier fits your operation?</div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px;align-items:center"><span>◉</span><div style="flex:1"><b>Skipper</b> — 1–5 vessels<div class="wf-muted">Directory listing, framework access, advocacy</div></div><b>$—/yr</b></div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px;align-items:center;border:2px solid #C9A23E"><span>◉</span><div style="flex:1"><b>Fleet</b> — 6–25 vessels <span class="wf-tag" style="border-color:#C9A23E;color:#8a6a1e">Most common</span><div class="wf-muted">+ insurance rates, training seats</div></div><b>$—/yr</b></div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px;align-items:center"><span>○</span><div style="flex:1"><b>Harbor</b> — 26+ vessels / multi-site<div class="wf-muted">+ FWC liaison priority, board eligibility</div></div><b>$—/yr</b></div>
+          <div style="display:flex;margin-top:4px"><span class="wf-btn" style="margin-left:auto">Continue →</span></div>
+        </div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">STEPS 2 &amp; 3 (same shell)</div>
+          <div class="wf-muted">2 — Business details: name, county, fleet, insurance carrier &amp; policy #, contact.<br>3 — Payment: card / ACH, order summary, "Pay &amp; submit". Confirmation screen states audit scheduling comes by email.</div>
+        </div>
+      </div>
+      <div class="wf-note">→ Wizard keeps each step short and lets tier price carry through; better if you add ACH/invoicing later.</div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "go with <a class="dv-oid" href="#2a">2a</a> and <a class="dv-oid" href="#2d">2d</a>" · "add an operator profile page" · "show the member confirmation email/screen"</p>
+</section>
+
+<section class="dv-turn wf" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">FWSC website wireframes — 3 homepage directions + 3 key inner pages</span></div>
+  <div class="dv-opts">
+
+    <!-- 1a: Authority-first homepage -->
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Homepage — Authority first (civic institution, seal-forward)</div>
+      <div class="dv-card" style="width:400px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FLORIDA WATER SPORTS COALITION</b><span style="margin-left:auto;display:flex;gap:8px"><span>Safety</span><span>Partners</span><span>Directory</span><span>Advocacy</span></span><span class="wf-btn" style="background:#C9A23E;border-color:#C9A23E;color:#14264E">Join</span></div>
+        <div class="wf-adv" style="border-radius:0;border-left:none;border-right:none">▲ CAUTION — Small craft advisory in effect for Tampa Bay through 6 PM EDT. <u style="margin-left:auto">All advisories →</u></div>
+        <div class="wf-sec" style="align-items:center;text-align:center;padding:24px 20px;background:#FAF6EC">
+          <div class="wf-seal" style="width:44px;height:44px;font-size:16px">⚓</div>
+          <div class="wf-eyebrow">A COALITION OF FLORIDA LIVERIES AND OPERATORS</div>
+          <div class="wf-h" style="font-size:18px">Safer vessels. Safer waters.</div>
+          <div class="wf-muted" style="max-width:300px">We unite boat rental and livery operators to strengthen safety standards, certification, and partnerships with the FWC, insurers, and licensing agencies.</div>
+          <div style="display:flex;gap:8px;margin-top:4px"><span class="wf-btn">Join the coalition</span><span class="wf-btn2">View the safety framework</span></div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">THE SAFETY FRAMEWORK</div>
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="wf-box" style="padding:8px"><b>Standards</b><div class="wf-muted">Vessel checks, briefings, rental protocols per F.S. §327.54</div></div>
+            <div class="wf-box" style="padding:8px"><b>Certification</b><div class="wf-muted">FWSC Certified Operator program — 3 levels</div></div>
+            <div class="wf-box" style="padding:8px"><b>Accountability</b><div class="wf-muted">Annual review, incident reporting, audits</div></div>
+          </div>
+        </div>
+        <div class="wf-sec" style="background:#14264E;color:#fff">
+          <div class="wf-eyebrow" style="color:#C9A23E">OFFICIAL PARTNERSHIPS</div>
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+            <div class="wf-fill" style="height:34px">FWC</div><div class="wf-fill" style="height:34px">Insurance</div><div class="wf-fill" style="height:34px">Licensing</div><div class="wf-fill" style="height:34px">USCG Aux</div>
+          </div>
+          <div class="wf-muted" style="color:#c9cede">Working with the Florida Fish and Wildlife Conservation Commission and industry partners.</div>
+        </div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">LEGISLATIVE ADVOCACY</div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:60px;height:44px;flex:none">img</div><div><b>2026 Session priorities</b><div class="wf-muted">Livery insurance minimums · rental age verification · no-wake enforcement</div></div></div>
+        </div>
+        <div class="wf-sec" style="flex-direction:row;align-items:center;background:#FAF6EC">
+          <div><b>Find a certified operator</b><div class="wf-muted">Search the public directory by county or waterway.</div></div>
+          <span class="wf-btn2" style="margin-left:auto">Open directory</span>
+        </div>
+        <div class="wf-nav" style="font-size:8.5px">Footer: seal · contact · statutes cited · member login</div>
+      </div>
+      <div class="wf-note">→ Leads with institutional credibility; join CTA is present but the framework is the hero.</div>
+    </div>
+
+    <!-- 1b: Membership-first homepage -->
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Homepage — Membership first (operator recruitment)</div>
+      <div class="dv-card" style="width:400px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto;display:flex;gap:8px"><span>Why join</span><span>Certification</span><span>Partners</span><span>Advocacy</span></span><span class="wf-btn" style="background:#C9A23E;border-color:#C9A23E;color:#14264E">Join</span></div>
+        <div class="wf-sec" style="flex-direction:row;gap:14px;padding:20px;background:#FAF6EC">
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div class="wf-eyebrow">FOR LIVERY &amp; RENTAL OPERATORS</div>
+            <div class="wf-h" style="font-size:17px">Stronger together on Florida's waterways</div>
+            <div class="wf-muted">Certification, insurance access, and a unified voice with the FWC and the Legislature.</div>
+            <div style="display:flex;gap:8px"><span class="wf-btn">Join the coalition</span><span class="wf-btn2">Member benefits</span></div>
+          </div>
+          <div class="wf-fill" style="width:120px;height:110px">operator photo</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">WHY OPERATORS JOIN</div>
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr">
+            <div class="wf-box" style="padding:8px"><b>Insurance partnerships</b><div class="wf-muted">Preferred rates for certified members</div></div>
+            <div class="wf-box" style="padding:8px"><b>FWC coordination</b><div class="wf-muted">Direct channel on rules and enforcement</div></div>
+            <div class="wf-box" style="padding:8px"><b>Certification</b><div class="wf-muted">A mark the public and regulators trust</div></div>
+            <div class="wf-box" style="padding:8px"><b>Advocacy</b><div class="wf-muted">One voice in Tallahassee</div></div>
+          </div>
+        </div>
+        <div class="wf-sec" style="background:#14264E;color:#fff">
+          <div class="wf-eyebrow" style="color:#C9A23E">PATH TO CERTIFICATION</div>
+          <div style="display:flex;gap:6px;align-items:center;font-size:9.5px">
+            <div class="wf-box" style="padding:6px;background:#1d3260;border-color:#C9A23E;color:#fff;flex:1">1. Apply</div>→
+            <div class="wf-box" style="padding:6px;background:#1d3260;border-color:#C9A23E;color:#fff;flex:1">2. Safety audit</div>→
+            <div class="wf-box" style="padding:6px;background:#1d3260;border-color:#C9A23E;color:#fff;flex:1">3. Staff training</div>→
+            <div class="wf-box" style="padding:6px;background:#1d3260;border-color:#C9A23E;color:#fff;flex:1">4. Certified</div>
+          </div>
+        </div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">MEMBER VOICES</div>
+          <div class="wf-box" style="padding:8px"><div class="wf-muted">"Certification cut our insurance premium and gave our customers confidence." — testimonial slot</div></div>
+        </div>
+        <div class="wf-sec" style="align-items:center;text-align:center;background:#FAF6EC">
+          <b>Ready to join?</b><div class="wf-muted">Dues scale by fleet size. Applications reviewed monthly.</div><span class="wf-btn">Start your application</span>
+        </div>
+        <div class="wf-nav" style="font-size:8.5px">Footer</div>
+      </div>
+      <div class="wf-note">→ Sells the coalition to operators; benefits + certification path above the fold.</div>
+    </div>
+
+    <!-- 1c: Public-safety-first homepage -->
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Homepage — Public safety first (advisories + directory forward)</div>
+      <div class="dv-card" style="width:400px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto;display:flex;gap:8px"><span>Advisories</span><span>Directory</span><span>Safety</span><span>About</span></span><span class="wf-btn" style="background:#C9A23E;border-color:#C9A23E;color:#14264E">Join</span></div>
+        <div class="wf-sec" style="padding:20px;background:#FAF6EC">
+          <div class="wf-eyebrow">FLORIDA WATERWAY SAFETY</div>
+          <div class="wf-h" style="font-size:17px">Know before you go</div>
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr">
+            <div class="wf-box" style="padding:8px"><b>Current advisories</b><div class="wf-adv" style="margin-top:6px">▲ Tampa Bay — small craft</div><div class="wf-adv" style="margin-top:4px;background:#FDEAEA;border-color:#B23A3A">■ Lake Okeechobee — closed</div></div>
+            <div class="wf-box" style="padding:8px"><b>Find a certified operator</b><div class="wf-fill" style="height:22px;margin-top:6px">search: county / waterway</div><span class="wf-btn2" style="margin-top:6px">Search</span></div>
+          </div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">WHAT CERTIFICATION MEANS</div>
+          <div style="display:flex;gap:8px"><div class="wf-seal" style="flex:none">✓</div><div class="wf-muted">Every FWSC-certified livery passes vessel inspections, briefs every renter, and carries verified insurance.</div></div>
+        </div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">SAFETY BY THE NUMBERS</div>
+          <div class="wf-grid" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="wf-box" style="padding:8px;text-align:center"><b style="font-size:14px">###</b><div class="wf-muted">certified operators</div></div>
+            <div class="wf-box" style="padding:8px;text-align:center"><b style="font-size:14px">##</b><div class="wf-muted">counties covered</div></div>
+            <div class="wf-box" style="padding:8px;text-align:center"><b style="font-size:14px">###</b><div class="wf-muted">staff trained</div></div>
+          </div>
+          <div class="wf-note">→ only if real numbers exist — no invented stats</div>
+        </div>
+        <div class="wf-sec" style="background:#14264E;color:#fff">
+          <div class="wf-eyebrow" style="color:#C9A23E">THE COALITION</div>
+          <div class="wf-muted" style="color:#c9cede">Who we are, partnerships with FWC / insurance / licensing, and our legislative agenda.</div>
+          <div style="display:flex;gap:8px"><span class="wf-btn2" style="background:transparent;color:#fff;border-color:#C9A23E">About us</span><span class="wf-btn" style="background:#C9A23E;border-color:#C9A23E;color:#14264E">Operators: join</span></div>
+        </div>
+        <div class="wf-nav" style="font-size:8.5px">Footer</div>
+      </div>
+      <div class="wf-note">→ Serves the public first; coalition/join content is secondary. Best if FWC partnership needs public-facing proof.</div>
+    </div>
+
+    <!-- 1d: Safety Framework page -->
+    <div class="dv-opt" id="1d">
+      <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Inner page — Safety Framework</div>
+      <div class="dv-card" style="width:360px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted" >nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">SAFETY FRAMEWORK</div>
+          <div class="wf-h" style="font-size:15px">The FWSC Standard for Livery Operations</div>
+          <div class="wf-muted">Aligned with F.S. §327.54 and FWC guidance. Adopted by all certified members.</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-box" style="padding:8px"><b>1. Vessel readiness</b><div class="wf-muted">Pre-rental inspection checklist · maintenance logs · required equipment (PFDs, fire ext., signals)</div></div>
+          <div class="wf-box" style="padding:8px"><b>2. Renter briefing</b><div class="wf-muted">Mandatory safety briefing · age & license verification · local hazards map</div></div>
+          <div class="wf-box" style="padding:8px"><b>3. Staff training</b><div class="wf-muted">CPR/first aid · incident response · annual refreshers</div></div>
+          <div class="wf-box" style="padding:8px"><b>4. Insurance & records</b><div class="wf-muted">Verified coverage minimums · incident reporting to coalition · audit trail</div></div>
+        </div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">DOWNLOADS</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="wf-tag">Inspection checklist (PDF)</span><span class="wf-tag">Briefing script (PDF)</span><span class="wf-tag">Full framework (PDF)</span></div>
+        </div>
+        <div class="wf-sec" style="background:#FAF6EC;flex-direction:row;align-items:center"><b>Adopt the framework</b><span class="wf-btn" style="margin-left:auto">Get certified</span></div>
+      </div>
+      <div class="wf-note">→ Numbered pillars = easy for Claude Code to template as repeatable cards.</div>
+    </div>
+
+    <!-- 1e: Partnerships page -->
+    <div class="dv-opt" id="1e">
+      <div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Inner page — Partnerships</div>
+      <div class="dv-card" style="width:360px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">PARTNERSHIPS</div>
+          <div class="wf-h" style="font-size:15px">Working With the Agencies That Keep Florida Boating Safe</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec">
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:44px;height:44px;flex:none">logo</div><div><b>FWC</b><div class="wf-muted">Rule coordination, enforcement liaison, data sharing on incidents</div></div></div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:44px;height:44px;flex:none">logo</div><div><b>Insurance partners</b><div class="wf-muted">Preferred coverage for certified operators; verified minimums</div></div></div>
+          <div class="wf-box" style="padding:8px;display:flex;gap:8px"><div class="wf-fill" style="width:44px;height:44px;flex:none">logo</div><div><b>Licensing agencies</b><div class="wf-muted">Streamlined livery permitting; renter license verification tools</div></div></div>
+        </div>
+        <div class="wf-sec" style="background:#14264E;color:#fff">
+          <div class="wf-eyebrow" style="color:#C9A23E">BECOME A PARTNER</div>
+          <div class="wf-muted" style="color:#c9cede">For agencies, insurers, and organizations aligned with our mission.</div>
+          <span class="wf-btn2" style="background:transparent;color:#fff;border-color:#C9A23E;align-self:flex-start">Contact the coalition</span>
+        </div>
+      </div>
+      <div class="wf-note">→ One repeating "partner row" pattern; logos are placeholders until provided.</div>
+    </div>
+
+    <!-- 1f: Join page -->
+    <div class="dv-opt" id="1f">
+      <div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Inner page — Join the Coalition</div>
+      <div class="dv-card" style="width:360px">
+        <div class="wf-nav"><div class="wf-seal">⚓</div><b>FWSC</b><span style="margin-left:auto" class="wf-muted">nav…</span></div>
+        <div class="wf-sec" style="background:#FAF6EC">
+          <div class="wf-eyebrow">MEMBERSHIP</div>
+          <div class="wf-h" style="font-size:15px">Join the Florida Water Sports Coalition</div>
+          <div class="wf-muted">Open to boat liveries, rental operations, and water-sport outfitters operating in Florida.</div>
+        </div>
+        <div class="wf-rule"></div>
+        <div class="wf-sec" style="flex-direction:row;gap:10px;align-items:flex-start">
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div class="wf-eyebrow">APPLICATION</div>
+            <div class="wf-fill" style="height:20px">Business name</div>
+            <div class="wf-fill" style="height:20px">County / waterway</div>
+            <div class="wf-fill" style="height:20px">Fleet size & vessel types</div>
+            <div class="wf-fill" style="height:20px">Current insurance carrier</div>
+            <div class="wf-fill" style="height:20px">Contact</div>
+            <span class="wf-btn" style="align-self:flex-start">Submit application</span>
+          </div>
+          <div class="wf-box" style="width:120px;padding:8px;flex:none">
+            <div class="wf-eyebrow">WHAT YOU GET</div>
+            <div class="wf-muted">· Certification path<br>· Insurance rates<br>· FWC liaison<br>· Advocacy voice<br>· Directory listing</div>
+          </div>
+        </div>
+        <div class="wf-sec">
+          <div class="wf-eyebrow">PROCESS</div>
+          <div class="wf-muted">Apply → coalition review (monthly) → safety audit scheduled → certification issued. Dues scale by fleet size.</div>
+        </div>
+      </div>
+      <div class="wf-note">→ Form left / benefits rail right; conversion page pattern.</div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "riff on <a class="dv-oid" href="#1a">1a</a> with the certification path from <a class="dv-oid" href="#1b">1b</a>" · "add a Certification program page" · "wireframe the operator directory"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

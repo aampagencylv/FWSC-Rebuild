@@ -1,0 +1,13 @@
+<!-- @dsCard group="Spacing" viewport="700x170" subtitle="Squared corners, hairlines, paper shadows" name="Radii, borders, shadows" -->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;background:var(--surface-page);padding:20px 28px;font-family:var(--font-sans)}
+.row{display:flex;gap:16px}
+.b{background:var(--white);width:150px;height:96px;display:flex;align-items:flex-end;padding:10px;box-sizing:border-box}
+.b span{font-size:11px;color:var(--ink-600)}</style></head>
+<body><div class="row">
+<div class="b" style="border:1px solid var(--line-300);border-radius:2px"><span>radius-sm 2 · hairline</span></div>
+<div class="b" style="border:1px solid var(--line-300);border-radius:4px;box-shadow:var(--shadow-card)"><span>radius-md 4 · shadow-card</span></div>
+<div class="b" style="border:1px solid var(--line-300);border-radius:6px;box-shadow:var(--shadow-raised)"><span>radius-lg 6 · shadow-raised</span></div>
+<div class="b" style="border:1px solid var(--navy-800);border-radius:2px"><span>border-strong (navy)</span></div>
+</div></body></html>
