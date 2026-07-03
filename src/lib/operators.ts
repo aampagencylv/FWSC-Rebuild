@@ -3,6 +3,8 @@ export interface Operator {
   name: string
   county: string
   waterway: string
+  lat: number
+  lon: number
   vesselTypes: string[]
   certLevel: 'I' | 'II' | 'III'
   memberSince: number
@@ -23,6 +25,8 @@ export const OPERATORS: Operator[] = [
     name: 'Crystal Waters Rentals',
     county: 'Orange',
     waterway: 'Lake Eustis',
+    lat: 28.8686,
+    lon: -81.7493,
     vesselTypes: ['Pontoon', 'Jet ski'],
     certLevel: 'II',
     memberSince: 2024,
@@ -41,6 +45,8 @@ export const OPERATORS: Operator[] = [
     name: 'Tampa Bay Tours',
     county: 'Hillsborough',
     waterway: 'Tampa Bay',
+    lat: 27.9506,
+    lon: -82.4332,
     vesselTypes: ['Charter', 'Pontoon'],
     certLevel: 'III',
     memberSince: 2023,
@@ -59,6 +65,8 @@ export const OPERATORS: Operator[] = [
     name: 'Kayak Adventures Co',
     county: 'Duval',
     waterway: 'St Johns River',
+    lat: 30.3322,
+    lon: -81.6557,
     vesselTypes: ['Kayak / SUP'],
     certLevel: 'I',
     memberSince: 2024,
@@ -76,6 +84,8 @@ export const OPERATORS: Operator[] = [
     name: 'Gulf Coast Jet Ski',
     county: 'Pinellas',
     waterway: 'Gulf of Mexico',
+    lat: 27.9759,
+    lon: -82.6303,
     vesselTypes: ['Jet ski'],
     certLevel: 'II',
     memberSince: 2023,
@@ -94,6 +104,8 @@ export const OPERATORS: Operator[] = [
     name: 'Everglades Tours LLC',
     county: 'Miami-Dade',
     waterway: 'Biscayne Bay',
+    lat: 25.7907,
+    lon: -80.13,
     vesselTypes: ['Charter', 'Pontoon'],
     certLevel: 'III',
     memberSince: 2022,
@@ -112,6 +124,8 @@ export const OPERATORS: Operator[] = [
     name: 'Sunrise Pontoon Rentals',
     county: 'Orange',
     waterway: 'Lake Eustis',
+    lat: 28.8500,
+    lon: -81.7600,
     vesselTypes: ['Pontoon'],
     certLevel: 'I',
     memberSince: 2024,

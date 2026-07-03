@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { fetchAllWeather, WeatherData } from '@/lib/weather'
 import styles from './WeatherBanner.module.css'
+
+interface WeatherData {
+  location: { name: string }
+  alert: boolean
+  alertType?: 'caution' | 'warning'
+}
 
 export default function WeatherBanner() {
   const [alerts, setAlerts] = useState<WeatherData[]>([])
@@ -13,8 +18,9 @@ export default function WeatherBanner() {
   useEffect(() => {
     const checkWeather = async () => {
       try {
-        const data = await fetchAllWeather()
-        const alertData = data.filter(w => w.alert)
+        const response = await fetch('/api/weather')
+        const data = await response.json()
+        const alertData = data.filter((w: WeatherData) => w.alert)
         setAlerts(alertData)
         setShow(alertData.length > 0)
       } catch (err) {

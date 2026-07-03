@@ -1,8 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { fetchAllWeather, WeatherData, getWeatherEmoji } from '@/lib/weather'
 import styles from './alerts.module.css'
+
+interface WeatherData {
+  location: { name: string; county: string; waterway: string }
+  temp: number
+  feelsLike: number
+  condition: string
+  windSpeed: number
+  windGust?: number
+  humidity: number
+  icon: string
+  alert: boolean
+  alertType?: 'caution' | 'warning'
+  emoji: string
+}
 
 export default function AlertsPage() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([])
@@ -13,20 +26,26 @@ export default function AlertsPage() {
     const loadWeather = async () => {
       try {
         setLoading(true)
-        const data = await fetchAllWeather()
+        const response = await fetch('/api/weather')
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`)
+        }
+
+        const data = await response.json()
         setWeatherData(data)
         setError(null)
       } catch (err) {
         setError('Unable to load weather data. Please try again later.')
-        console.error(err)
+        console.error('Weather fetch error:', err)
       } finally {
         setLoading(false)
       }
     }
 
     loadWeather()
-    // Refresh every 30 minutes
-    const interval = setInterval(loadWeather, 30 * 60 * 1000)
+    // Refresh every 15 minutes
+    const interval = setInterval(loadWeather, 15 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -87,7 +106,7 @@ export default function AlertsPage() {
                 >
                   <div className={styles.cardHeader}>
                     <h3>{weather.location.name}</h3>
-                    <span className={styles.emoji}>{getWeatherEmoji(weather.icon)}</span>
+                    <span className={styles.emoji}>{weather.emoji}</span>
                   </div>
 
                   <div className={styles.cardContent}>
