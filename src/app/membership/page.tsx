@@ -218,9 +218,9 @@ export default function Membership() {
                   required
                 >
                   <option value="">Select fleet size</option>
-                  <option value="1-5 vessels">1–5 vessels (Skipper)</option>
-                  <option value="6-25 vessels">6–25 vessels (Fleet)</option>
-                  <option value="26+ vessels">26+ vessels (Harbor)</option>
+                  <option value="1-5 vessels">1–5 vessels (Skipper) - $350/year</option>
+                  <option value="6-25 vessels">6–25 vessels (Fleet) - $750/year</option>
+                  <option value="26+ vessels">26+ vessels (Harbor) - $1,500/year</option>
                 </select>
               </div>
 
