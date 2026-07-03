@@ -1,7 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet'
 import L from 'leaflet'
 import type { Operator } from '@/lib/operators'
 import 'leaflet/dist/leaflet.css'
@@ -27,6 +28,7 @@ const selectedIcon = L.icon({
 
 export default function DirectoryMap({ operators, selectedId }: DirectoryMapProps) {
   const router = useRouter()
+  const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   if (operators.length === 0) {
     return (
@@ -70,8 +72,26 @@ export default function DirectoryMap({ operators, selectedId }: DirectoryMapProp
           icon={selectedId === op.id ? selectedIcon : defaultIcon}
           eventHandlers={{
             click: () => handleMarkerClick(op.id),
+            mouseover: () => setHoveredId(op.id),
+            mouseout: () => setHoveredId(null),
           }}
         >
+          <Tooltip
+            permanent={hoveredId === op.id}
+            direction="top"
+            offset={[0, -10]}
+            opacity={1}
+            className="operator-tooltip"
+          >
+            <div style={{
+              fontSize: '13px',
+              fontWeight: '600',
+              color: '#14264E',
+              whiteSpace: 'nowrap',
+            }}>
+              {op.name}
+            </div>
+          </Tooltip>
           <Popup>
             <div style={{ minWidth: '200px' }}>
               <strong>{op.name}</strong>
