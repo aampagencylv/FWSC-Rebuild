@@ -56,14 +56,12 @@ export default function Membership() {
     county: '',
     waterway: '',
     fleetSize: '',
+    vesselTypes: '',
     insuranceCarrier: '',
     policyNumber: '',
     contactName: '',
     contactEmail: '',
     cardName: '',
-    cardNumber: '',
-    cardExpiry: '',
-    cardCVC: '',
     cardZip: '',
   })
 
@@ -73,6 +71,17 @@ export default function Membership() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+
+    // Auto-select tier based on fleet size
+    if (name === 'fleetSize') {
+      if (value.includes('1') || value.includes('2') || value.includes('3') || value.includes('4') || value.includes('5')) {
+        if (!value.includes('26') && !value.includes('25')) setSelectedTier('skipper')
+      } else if (value.includes('6') || value.includes('7') || value.includes('8') || value.includes('9') || value.includes('10') || value.includes('15') || value.includes('20') || value.includes('25')) {
+        setSelectedTier('fleet')
+      } else if (value.includes('26') || value.includes('50') || value.includes('100')) {
+        setSelectedTier('harbor')
+      }
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -175,15 +184,30 @@ export default function Membership() {
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="fleetSize">Fleet size and vessel types*</label>
-                <input
+                <label htmlFor="fleetSize">Fleet size*</label>
+                <select
                   id="fleetSize"
                   name="fleetSize"
-                  type="text"
-                  placeholder="Example: 12 vessels — pontoon, jet ski"
                   value={formData.fleetSize}
                   onChange={handleInputChange}
                   required
+                >
+                  <option value="">Select fleet size</option>
+                  <option value="1-5 vessels">1–5 vessels (Skipper)</option>
+                  <option value="6-25 vessels">6–25 vessels (Fleet)</option>
+                  <option value="26+ vessels">26+ vessels (Harbor)</option>
+                </select>
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="vesselTypes">Vessel types</label>
+                <input
+                  id="vesselTypes"
+                  name="vesselTypes"
+                  type="text"
+                  placeholder="Example: pontoon, jet ski, kayak"
+                  value={formData.vesselTypes}
+                  onChange={handleInputChange}
                 />
               </div>
 
