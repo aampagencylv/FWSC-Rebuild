@@ -19,36 +19,34 @@ async function fetchWeatherData(): Promise<WeatherData[]> {
     let url = '/api/weather'
 
     // On Vercel, use the full URL with the Vercel domain
-    if (process.env.VERCEL === '1' && process.env.VERCEL_URL) {
-      url = `https://${process.env.VERCEL_URL}/api/weather`
+    if (process.env.VERCEL === '1') {
+      url = `https://${process.env.VERCEL_URL || 'fwsc.vercel.app'}/api/weather`
     }
+
+    console.log('[Alerts] Fetching weather from:', url)
 
     const response = await fetch(url, {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
       },
-      // Add timeout
-      signal: AbortSignal.timeout(5000),
     })
 
+    console.log('[Alerts] Response received:', response.status)
+
     if (!response.ok) {
-      console.error('[Alerts] API error status:', response.status)
+      const text = await response.text()
+      console.error('[Alerts] API error:', response.status, text.substring(0, 200))
       throw new Error(`API error: ${response.status}`)
     }
 
     const data = await response.json()
-    console.log('[Alerts] Weather data received:', Array.isArray(data) ? data.length : 'invalid', 'items')
+    console.log('[Alerts] Weather data:', Array.isArray(data) ? `${data.length} items` : 'invalid format')
 
-    if (!Array.isArray(data)) {
-      console.error('[Alerts] Invalid data format, expected array')
-      return []
-    }
-
-    return data
+    return Array.isArray(data) ? data : []
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
-    console.error('[Alerts] Weather fetch failed:', message)
+    console.error('[Alerts] Fetch failed:', message)
     return []
   }
 }
