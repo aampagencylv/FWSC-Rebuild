@@ -1,7 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
 import styles from './membership.module.css'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 const TIERS = [
   {
@@ -64,6 +67,8 @@ export default function Membership() {
     cardName: '',
     cardZip: '',
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const tier = TIERS.find(t => t.id === selectedTier)!
   const total = tier.price + APP_FEE
@@ -84,10 +89,45 @@ export default function Membership() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Stripe integration
-    alert(`Application submitted for ${tier.name} tier. Stripe checkout coming soon.`)
+    setError(null)
+    setIsLoading(true)
+
+    try {
+      // Create checkout session
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tier: selectedTier,
+          email: formData.contactEmail,
+          company: formData.businessName,
+        }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to create checkout session')
+      }
+
+      const { sessionId } = await response.json()
+
+      // Redirect to Stripe checkout
+      const stripe = await stripePromise
+      if (!stripe) throw new Error('Stripe failed to load')
+
+      const result = await stripe.redirectToCheckout({ sessionId })
+      if (result.error) {
+        throw new Error(result.error.message)
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'An error occurred'
+      setError(message)
+      console.error('Checkout error:', err)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -263,10 +303,20 @@ export default function Membership() {
 
           {/* Payment Card */}
           <div className={styles.card}>
-            <h3>Payment Information</h3>
-            <p style={{ fontSize: '13px', color: 'var(--ink-600, #4A5265)', margin: '0 0 16px 0' }}>
-              Stripe checkout will be integrated here. For now, this application will be reviewed and processed manually.
-            </p>
+            <h3>Billing Information</h3>
+            {error && (
+              <div style={{
+                padding: '12px',
+                marginBottom: '16px',
+                backgroundColor: '#fee',
+                border: '1px solid #fcc',
+                borderRadius: '4px',
+                color: '#c33',
+                fontSize: '14px'
+              }}>
+                {error}
+              </div>
+            )}
             <div className={styles.formGrid}>
               <div className={`${styles.field} ${styles.fullWidth}`}>
                 <label htmlFor="cardName">Billing contact*</label>
@@ -316,8 +366,8 @@ export default function Membership() {
               <span>${total}</span>
             </div>
 
-            <button type="submit" className={styles.submitBtn}>
-              Pay and submit application
+            <button type="submit" className={styles.submitBtn} disabled={isLoading}>
+              {isLoading ? 'Processing...' : 'Pay and submit application'}
             </button>
 
             <p className={styles.finePrint}>
