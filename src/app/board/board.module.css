@@ -137,74 +137,62 @@
 
 /* Back side */
 .bioParagraph {
-  margin: 0;
+  margin: 0 0 16px 0;
   font-size: 14px;
   line-height: 1.6;
   color: var(--ink-600, #4A5265);
 }
 
-.contactSection {
+.contactDetails {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--line-300, #D8D3C4);
 }
 
-.emailLabel {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--navy-800, #14264E);
-}
-
-.emailInput {
-  padding: 8px 12px;
-  border: 1px solid var(--line-300, #D8D3C4);
-  border-radius: 3px;
-  font-size: 13px;
-  color: var(--navy-800, #14264E);
-  min-height: 36px;
-  background-color: white;
-}
-
-.emailInput:focus {
-  outline: none;
-  border-color: var(--navy-800, #14264E);
-  box-shadow: 0 0 0 2px var(--gold-500, #C9A23E);
-}
-
-.emailInput::placeholder {
-  color: var(--ink-400, #7C8496);
-}
-
-.contactBtn {
-  padding: 8px 16px;
-  background-color: var(--navy-800, #14264E);
-  color: white;
-  border: none;
-  border-radius: 3px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 140ms ease-out;
-  min-height: 36px;
-}
-
-.contactBtn:hover {
-  background-color: var(--navy-700, #1D3463);
-}
-
 .linkedinLink {
-  text-align: center;
   color: var(--water-500, #4E7FBE);
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
   transition: color 140ms ease-out;
+  display: inline-block;
 }
 
 .linkedinLink:hover {
   color: var(--water-600, #3D6BA8);
+  text-decoration: underline;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactLabel {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-400, #7C8496);
+}
+
+.emailLink,
+.phoneLink {
+  color: var(--navy-800, #14264E);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 140ms ease-out;
+  word-break: break-all;
+}
+
+.emailLink:hover,
+.phoneLink:hover {
+  color: var(--water-500, #4E7FBE);
   text-decoration: underline;
 }
 
