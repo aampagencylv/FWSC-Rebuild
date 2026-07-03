@@ -70,12 +70,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   padding: 20px 16px;
   background-color: white;
   border: 1px solid var(--line-300, #D8D3C4);
   border-radius: 4px;
   transform: rotateY(0deg);
+  text-align: center;
 }
 
 .cardBack {
