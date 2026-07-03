@@ -119,16 +119,34 @@ export default function Directory() {
                       </span>
                     </div>
 
+                    {op.address && (
+                      <p className={styles.gridCardMeta}>
+                        {op.address}
+                      </p>
+                    )}
+
                     <p className={styles.gridCardMeta}>
-                      {op.county}
+                      {op.county} • {op.waterway}
                     </p>
 
                     <p className={styles.gridCardMeta}>
                       {op.vesselTypes.join(', ')}
                     </p>
 
+                    {op.contactPhone && (
+                      <p className={styles.gridCardPhone}>
+                        {op.contactPhone}
+                      </p>
+                    )}
+
+                    {op.website && (
+                      <p className={styles.gridCardWebsite}>
+                        {op.website}
+                      </p>
+                    )}
+
                     <div className={styles.gridCardFooter}>
-                      <span className={styles.viewLink}>View</span>
+                      <span className={styles.viewLink}>View profile</span>
                       {op.insuranceVerified && <span className={styles.verified}>✓ Verified</span>}
                     </div>
                   </Link>

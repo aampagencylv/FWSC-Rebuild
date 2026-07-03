@@ -5,6 +5,7 @@ export interface Operator {
   waterway: string
   lat: number
   lon: number
+  address?: string
   vesselTypes: string[]
   certLevel: 'I' | 'II' | 'III'
   memberSince: number
@@ -27,6 +28,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'Lake Eustis',
     lat: 28.8686,
     lon: -81.7493,
+    address: '4521 Lake Eustis Dr, Eustis, FL 32726',
     vesselTypes: ['Pontoon', 'Jet ski'],
     certLevel: 'II',
     memberSince: 2024,
@@ -47,6 +49,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'Tampa Bay',
     lat: 27.9506,
     lon: -82.4332,
+    address: '5910 N 15th St, Tampa, FL 33610',
     vesselTypes: ['Charter', 'Pontoon'],
     certLevel: 'III',
     memberSince: 2023,
@@ -67,6 +70,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'St Johns River',
     lat: 30.3322,
     lon: -81.6557,
+    address: '2147 San Marco Ave, Jacksonville, FL 32207',
     vesselTypes: ['Kayak / SUP'],
     certLevel: 'I',
     memberSince: 2024,
@@ -86,6 +90,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'Gulf of Mexico',
     lat: 27.9759,
     lon: -82.6303,
+    address: '227 Papaya Ave, Clearwater, FL 33755',
     vesselTypes: ['Jet ski'],
     certLevel: 'II',
     memberSince: 2023,
@@ -106,6 +111,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'Biscayne Bay',
     lat: 25.7907,
     lon: -80.13,
+    address: '10000 Ingraham Ave, Miami, FL 33134',
     vesselTypes: ['Charter', 'Pontoon'],
     certLevel: 'III',
     memberSince: 2022,
@@ -126,6 +132,7 @@ export const OPERATORS: Operator[] = [
     waterway: 'Lake Eustis',
     lat: 28.8500,
     lon: -81.7600,
+    address: '3215 Lake Eustis Rd, Mount Dora, FL 32757',
     vesselTypes: ['Pontoon'],
     certLevel: 'I',
     memberSince: 2024,
