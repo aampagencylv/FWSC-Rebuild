@@ -1,71 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import styles from './directory.module.css'
-
-// Mock operator data
-const MOCK_OPERATORS = [
-  {
-    id: 1,
-    name: 'Crystal Waters Rentals',
-    county: 'Orange',
-    waterway: 'Lake Eustis',
-    vesselTypes: ['Pontoon', 'Jet ski'],
-    certLevel: 'II',
-    memberSince: 2024,
-    insuranceVerified: true,
-  },
-  {
-    id: 2,
-    name: 'Tampa Bay Tours',
-    county: 'Hillsborough',
-    waterway: 'Tampa Bay',
-    vesselTypes: ['Charter', 'Pontoon'],
-    certLevel: 'III',
-    memberSince: 2023,
-    insuranceVerified: true,
-  },
-  {
-    id: 3,
-    name: 'Kayak Adventures Co',
-    county: 'Duval',
-    waterway: 'St Johns River',
-    vesselTypes: ['Kayak / SUP'],
-    certLevel: 'I',
-    memberSince: 2024,
-    insuranceVerified: false,
-  },
-  {
-    id: 4,
-    name: 'Gulf Coast Jet Ski',
-    county: 'Pinellas',
-    waterway: 'Gulf of Mexico',
-    vesselTypes: ['Jet ski'],
-    certLevel: 'II',
-    memberSince: 2023,
-    insuranceVerified: true,
-  },
-  {
-    id: 5,
-    name: 'Everglades Tours LLC',
-    county: 'Miami-Dade',
-    waterway: 'Biscayne Bay',
-    vesselTypes: ['Charter', 'Pontoon'],
-    certLevel: 'III',
-    memberSince: 2022,
-    insuranceVerified: true,
-  },
-  {
-    id: 6,
-    name: 'Sunrise Pontoon Rentals',
-    county: 'Orange',
-    waterway: 'Lake Eustis',
-    vesselTypes: ['Pontoon'],
-    certLevel: 'I',
-    memberSince: 2024,
-    insuranceVerified: false,
-  },
-]
+import { OPERATORS } from '@/lib/operators'
 
 const COUNTIES = ['All', 'Orange', 'Hillsborough', 'Duval', 'Pinellas', 'Miami-Dade']
 const WATERWAYS = ['All', 'Lake Eustis', 'Tampa Bay', 'St Johns River', 'Gulf of Mexico', 'Biscayne Bay']
@@ -177,7 +115,7 @@ export default function Directory() {
           <div className={styles.operatorList}>
             {paginatedOps.length > 0 ? (
               paginatedOps.map(op => (
-                <div key={op.id} className={styles.operatorCard}>
+                <Link key={op.id} href={`/directory/${op.id}`} className={styles.operatorCard}>
                   <div className={styles.logo}>
                     <div />
                   </div>
@@ -195,14 +133,14 @@ export default function Directory() {
                     </p>
 
                     <div className={styles.links}>
-                      <a href="#">View profile</a>
+                      <span className={styles.viewProfile}>View profile</span>
                       <span className={styles.separator}>·</span>
                       <span className={styles.verified}>
                         Member since {op.memberSince} · {op.insuranceVerified ? 'Insurance verified' : 'Insurance pending'}
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))
             ) : (
               <div className={styles.noResults}>
