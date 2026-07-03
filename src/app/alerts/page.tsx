@@ -8,7 +8,6 @@ export default function AlertsPage() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
     const loadWeather = async () => {
@@ -34,10 +33,6 @@ export default function AlertsPage() {
   const alerts = weatherData.filter(w => w.alert)
   const dangerAlerts = alerts.filter(w => w.alertType === 'warning')
   const cautionAlerts = alerts.filter(w => w.alertType === 'caution')
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    setScrollPosition((e.target as HTMLDivElement).scrollLeft)
-  }
 
   return (
     <div className={styles.page}>
@@ -82,7 +77,7 @@ export default function AlertsPage() {
           ) : error ? (
             <div className={styles.error}>{error}</div>
           ) : (
-            <div className={styles.scrollContainer} onScroll={handleScroll}>
+            <div className={styles.scrollContainer}>
               {weatherData.map((weather, index) => (
                 <div
                   key={index}
