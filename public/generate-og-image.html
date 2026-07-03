@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate OG Image</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+        button {
+            background: #14264E;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        button:hover {
+            background: #1D3463;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FWSC Social Share Image Generator</h1>
+        <p>This tool generates a 1200x630px OpenGraph image using the hero photo.</p>
+        <canvas id="ogCanvas" width="1200" height="630"></canvas>
+        <button onclick="downloadImage()">Download as og-image.png</button>
+    </div>
+
+    <script>
+        const NAVY = '#14264E';
+        const GOLD = '#C9A23E';
+        const WHITE = '#F5EFDF';
+
+        function generateOGImage() {
+            const canvas = document.getElementById('ogCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Create image object
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                // Draw the background image
+                ctx.drawImage(img, 0, 0, 1200, 630);
+
+                // Add dark overlay for text readability (bottom half slightly darker)
+                const gradient = ctx.createLinearGradient(0, 0, 0, 630);
+                gradient.addColorStop(0, 'rgba(20, 38, 78, 0.2)');
+                gradient.addColorStop(0.6, 'rgba(20, 38, 78, 0.5)');
+                gradient.addColorStop(1, 'rgba(20, 38, 78, 0.7)');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 1200, 630);
+
+                // Add gold accent bar
+                ctx.fillStyle = GOLD;
+                ctx.fillRect(0, 0, 8, 630);
+
+                // Main heading - FLORIDA WATER SPORTS COALITION
+                ctx.fillStyle = WHITE;
+                ctx.font = 'bold 64px "Marcellus", Arial, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+                ctx.shadowBlur = 12;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
+                // Split into two lines for better fitting
+                ctx.fillText('FLORIDA WATER SPORTS', 80, 380);
+                ctx.fillText('COALITION', 80, 455);
+
+                // Tagline with gold color
+                ctx.shadowBlur = 8;
+                ctx.font = 'bold 32px Arial, sans-serif';
+                ctx.fillStyle = GOLD;
+                ctx.fillText('Safer Vessels · Safer Waters', 80, 530);
+
+                // Small descriptor
+                ctx.shadowBlur = 6;
+                ctx.font = '16px Arial, sans-serif';
+                ctx.fillStyle = WHITE;
+                ctx.fillText('Certified Water Sports Operators Across Florida', 80, 570);
+            };
+
+            // Load the hero image
+            img.src = '/hero-family-boat.jpg';
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('ogCanvas');
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png', 0.95);
+            link.download = 'og-image.png';
+            link.click();
+        }
+
+        // Generate on load
+        window.addEventListener('load', generateOGImage);
+    </script>
+</body>
+</html>

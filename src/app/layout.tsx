@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Florida Water Sports Coalition',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'Florida Water Sports Coalition',
