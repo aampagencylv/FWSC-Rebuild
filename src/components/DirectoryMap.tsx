@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import type { Operator } from '@/lib/operators'
@@ -25,6 +26,8 @@ const selectedIcon = L.icon({
 })
 
 export default function DirectoryMap({ operators, selectedId }: DirectoryMapProps) {
+  const router = useRouter()
+
   if (operators.length === 0) {
     return (
       <div style={{
@@ -44,6 +47,10 @@ export default function DirectoryMap({ operators, selectedId }: DirectoryMapProp
   const bounds = L.latLngBounds(operators.map(op => [op.lat, op.lon]))
   const center = bounds.getCenter()
 
+  const handleMarkerClick = (operatorId: number) => {
+    router.push(`/directory/${operatorId}`)
+  }
+
   return (
     <MapContainer
       center={[center.lat, center.lng]}
@@ -61,6 +68,9 @@ export default function DirectoryMap({ operators, selectedId }: DirectoryMapProp
           key={op.id}
           position={[op.lat, op.lon]}
           icon={selectedId === op.id ? selectedIcon : defaultIcon}
+          eventHandlers={{
+            click: () => handleMarkerClick(op.id),
+          }}
         >
           <Popup>
             <div style={{ minWidth: '200px' }}>
@@ -71,6 +81,22 @@ export default function DirectoryMap({ operators, selectedId }: DirectoryMapProp
               <p style={{ margin: '4px 0', fontSize: '12px', color: '#666' }}>
                 Level {op.certLevel}
               </p>
+              <button
+                onClick={() => handleMarkerClick(op.id)}
+                style={{
+                  marginTop: '8px',
+                  padding: '6px 12px',
+                  backgroundColor: '#14264E',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                }}
+              >
+                View Profile
+              </button>
             </div>
           </Popup>
         </Marker>
