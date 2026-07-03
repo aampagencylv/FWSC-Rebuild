@@ -1,21 +1,10 @@
 'use client'
 
-import { Metadata } from 'next'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import styles from './directory.module.css'
 import { OPERATORS } from '@/lib/operators'
-
-export const metadata: Metadata = {
-  title: 'Certified Operators Directory | Florida Water Sports Coalition',
-  description: 'Find certified water sports operators across Florida. Browse by location, waterway, certification level, and vessel type. Connect with safe, professional livery services.',
-  openGraph: {
-    title: 'Certified Operators Directory | FWSC',
-    description: 'Discover certified water sports operators throughout Florida',
-    type: 'website',
-  },
-}
 
 const COUNTIES = ['All', 'Orange', 'Hillsborough', 'Duval', 'Pinellas', 'Miami-Dade']
 const WATERWAYS = ['All', 'Lake Eustis', 'Tampa Bay', 'St Johns River', 'Gulf of Mexico', 'Biscayne Bay']
