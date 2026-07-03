@@ -3,5 +3,12 @@
   "outputDirectory": ".next",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/(.*).",
+      "destination": "https://flwsc.org/$1",
+      "permanent": true
+    }
+  ]
 }
