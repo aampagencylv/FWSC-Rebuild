@@ -265,30 +265,19 @@
 
 .partnerCard {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  text-align: center;
+  justify-content: center;
 }
 
 .partnerLogo {
   height: 60px;
   width: auto;
   object-fit: contain;
-  filter: grayscale(0%);
-  transition: filter 200ms ease;
+  transition: opacity 200ms ease;
 }
 
 .partnerCard:hover .partnerLogo {
-  filter: grayscale(0%);
   opacity: 0.8;
-}
-
-.partnerCard p {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--navy-800, #14264E);
 }
 
 /* CTA Band */
