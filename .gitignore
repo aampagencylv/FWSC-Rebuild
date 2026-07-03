@@ -19,3 +19,4 @@ build
 .payload
 .pnp
 .pnp.js
+.env*
