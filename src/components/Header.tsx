@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import styles from './Header.module.css'
 
 const navigation = [
@@ -15,6 +16,7 @@ const navigation = [
 
 export default function Header() {
   const pathname = usePathname()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <>
@@ -39,12 +41,13 @@ export default function Header() {
           </div>
         </Link>
 
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${mobileMenuOpen ? styles.mobileOpen : ''}`}>
           {navigation.map(item => (
             <Link
               key={item.href}
               href={item.href}
               className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               {item.label}
             </Link>
@@ -54,6 +57,16 @@ export default function Header() {
         <Link href="/membership" className={styles.cta}>
           Become a member
         </Link>
+
+        <button
+          className={styles.hamburger}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </header>
     </>
   )

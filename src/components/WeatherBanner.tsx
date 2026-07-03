@@ -53,8 +53,14 @@ export default function WeatherBanner() {
 
   return (
     <div className={`${styles.banner} ${styles[hasWarning ? 'warning' : 'caution']}`}>
+      <button
+        className={styles.close}
+        onClick={() => setShow(false)}
+        aria-label="Close alert"
+      >
+        ✕
+      </button>
       <div className={styles.content}>
-        <span className={styles.icon}>{hasWarning ? '⚠️' : '⚡'}</span>
         <div className={styles.text}>
           <strong>{hasWarning ? 'WEATHER WARNING' : 'WEATHER ALERT'}:</strong>
           {' '}Inclement conditions at {locations}.{' '}
@@ -63,13 +69,6 @@ export default function WeatherBanner() {
           </Link>
         </div>
       </div>
-      <button
-        className={styles.close}
-        onClick={() => setShow(false)}
-        aria-label="Close alert"
-      >
-        ✕
-      </button>
     </div>
   )
 }

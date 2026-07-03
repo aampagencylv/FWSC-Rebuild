@@ -118,20 +118,87 @@
   background-color: var(--gold-700, #A67E28);
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  transition: all 200ms ease;
+  border-radius: 1px;
+}
+
+.hamburger:hover span {
+  background-color: var(--gold-400, #E3BE6A);
+}
+
 @media (max-width: 768px) {
   .masthead {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 12px;
     gap: 12px;
+    align-items: center;
+    position: relative;
+  }
+
+  .hamburger {
+    display: flex;
+    order: 3;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .cta {
+    order: 2;
   }
 
   .nav {
+    order: 4;
     width: 100%;
     margin-left: 0;
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease;
+    background-color: var(--navy-700, #1D3463);
+    border-top: 1px solid var(--navy-600, #263551);
+    margin-top: 0;
+  }
+
+  .nav.mobileOpen {
+    max-height: 500px;
   }
 
   .navItem {
-    flex: 1;
-    justify-content: center;
+    padding: 14px 16px;
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--navy-600, #263551);
+    border-radius: 0;
+    color: #C8D2E4;
+  }
+
+  .navItem:hover {
+    background-color: var(--navy-600, #263551);
+  }
+
+  .navItem.active {
+    background-color: var(--navy-600, #263551);
+    border-bottom: 1px solid var(--navy-600, #263551);
+    color: var(--gold-400, #E3BE6A);
+    padding-bottom: 14px;
+    font-weight: 600;
   }
 }
