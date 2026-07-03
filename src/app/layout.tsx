@@ -7,6 +7,26 @@ import WeatherBanner from '@/components/WeatherBanner'
 export const metadata: Metadata = {
   title: 'Florida Water Sports Coalition',
   description: 'Safer vessels. Safer waters. A coalition of Florida liveries and operators committed to passenger safety.',
+  openGraph: {
+    title: 'Florida Water Sports Coalition',
+    description: 'Certified water sports operators across Florida\'s waterways. Safer vessels. Safer waters.',
+    url: 'https://fwsc.org',
+    siteName: 'Florida Water Sports Coalition',
+    images: [
+      {
+        url: '/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Florida Water Sports Coalition',
+      },
+    ],
+    type: 'website',
+  },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({

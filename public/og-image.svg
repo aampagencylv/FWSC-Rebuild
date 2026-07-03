@@ -1,0 +1,53 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14264E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E1A34;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="8" height="630" fill="#C9A23E"/>
+
+  <!-- Decorative compass rose (top right) -->
+  <circle cx="1100" cy="100" r="40" fill="none" stroke="#C9A23E" stroke-width="2" opacity="0.3"/>
+  <path d="M 1100 60 L 1110 90 L 1120 80 M 1100 140 L 1090 110 L 1080 120 M 1140 100 L 1110 100 L 1120 90 M 1060 100 L 1090 100 L 1080 110"
+        stroke="#C9A23E" stroke-width="2" fill="none" opacity="0.3"/>
+
+  <!-- Decorative compass rose (bottom left) -->
+  <circle cx="120" cy="530" r="50" fill="none" stroke="#C9A23E" stroke-width="2" opacity="0.3"/>
+
+  <!-- Main text -->
+  <text x="80" y="180" font-family="Marcellus, serif" font-size="72" font-weight="bold" fill="#F5EFDF">
+    FLORIDA WATER SPORTS
+  </text>
+  <text x="80" y="260" font-family="Marcellus, serif" font-size="72" font-weight="bold" fill="#F5EFDF">
+    COALITION
+  </text>
+
+  <!-- Tagline -->
+  <text x="80" y="330" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#C9A23E">
+    Safer Vessels · Safer Waters
+  </text>
+
+  <!-- Descriptive text -->
+  <text x="80" y="380" font-family="Arial, sans-serif" font-size="18" fill="#C8D2E4">
+    Certified Water Sports Operators
+  </text>
+  <text x="80" y="410" font-family="Arial, sans-serif" font-size="18" fill="#C8D2E4">
+    Across Florida's Waterways
+  </text>
+
+  <!-- Anchor decoration -->
+  <text x="1120" y="570" font-family="Arial, sans-serif" font-size="40" fill="#C9A23E" opacity="0.4" text-anchor="end">
+    ⚓
+  </text>
+
+  <!-- Website -->
+  <text x="1120" y="610" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C9A23E" text-anchor="end">
+    fwsc.org
+  </text>
+</svg>
