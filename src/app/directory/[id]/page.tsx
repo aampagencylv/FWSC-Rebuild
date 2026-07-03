@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { OPERATORS } from '@/lib/operators'
+import OperatorMap from '@/components/OperatorMap'
 import styles from './profile.module.css'
 
 export default async function OperatorProfile({ params }: { params: Promise<{ id: string }> }) {
@@ -54,6 +55,17 @@ export default async function OperatorProfile({ params }: { params: Promise<{ id
           <section className={styles.section}>
             <h2>About</h2>
             <p>{operator.description}</p>
+          </section>
+
+          {/* Map */}
+          <section className={styles.section}>
+            <h2>Location</h2>
+            <OperatorMap
+              name={operator.name}
+              lat={operator.lat}
+              lon={operator.lon}
+              waterway={operator.waterway}
+            />
           </section>
 
           {/* Operations */}
