@@ -1,6 +1,3 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import styles from './alerts.module.css'
 
 interface WeatherData {
@@ -17,37 +14,29 @@ interface WeatherData {
   emoji: string
 }
 
-export default function AlertsPage() {
-  const [weatherData, setWeatherData] = useState<WeatherData[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+async function fetchWeatherData(): Promise<WeatherData[]> {
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000'
 
-  useEffect(() => {
-    const loadWeather = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch('/api/weather')
+    const response = await fetch(`${baseUrl}/api/weather`, {
+      cache: 'no-store'
+    })
 
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`)
-        }
-
-        const data = await response.json()
-        setWeatherData(data)
-        setError(null)
-      } catch (err) {
-        setError('Unable to load weather data. Please try again later.')
-        console.error('Weather fetch error:', err)
-      } finally {
-        setLoading(false)
-      }
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
     }
 
-    loadWeather()
-    // Refresh every 15 minutes
-    const interval = setInterval(loadWeather, 15 * 60 * 1000)
-    return () => clearInterval(interval)
-  }, [])
+    return await response.json()
+  } catch (error) {
+    console.error('Failed to fetch weather:', error)
+    return []
+  }
+}
+
+export default async function AlertsPage() {
+  const weatherData = await fetchWeatherData()
 
   const alerts = weatherData.filter(w => w.alert)
   const dangerAlerts = alerts.filter(w => w.alertType === 'warning')
@@ -91,11 +80,7 @@ export default function AlertsPage() {
         {/* Scrolling Weather Widget */}
         <section className={styles.scrollSection}>
           <h2>Conditions Across Florida</h2>
-          {loading ? (
-            <div className={styles.loading}>Loading weather data...</div>
-          ) : error ? (
-            <div className={styles.error}>{error}</div>
-          ) : (
+          {weatherData.length > 0 ? (
             <div className={styles.scrollContainer}>
               {weatherData.map((weather, index) => (
                 <div
@@ -144,6 +129,8 @@ export default function AlertsPage() {
                 </div>
               ))}
             </div>
+          ) : (
+            <div className={styles.error}>No weather data available</div>
           )}
           <p className={styles.hint}>← Scroll to see more locations →</p>
         </section>

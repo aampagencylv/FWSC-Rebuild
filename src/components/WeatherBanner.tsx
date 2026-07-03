@@ -18,13 +18,17 @@ export default function WeatherBanner() {
   useEffect(() => {
     const checkWeather = async () => {
       try {
-        const response = await fetch('/api/weather')
+        console.log('[WeatherBanner] Fetching weather...')
+        const response = await fetch('/api/weather', { cache: 'no-store' })
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
         const data = await response.json()
+        console.log('[WeatherBanner] Got data:', data.length, 'locations')
         const alertData = data.filter((w: WeatherData) => w.alert)
+        console.log('[WeatherBanner] Alert locations:', alertData.length)
         setAlerts(alertData)
         setShow(alertData.length > 0)
       } catch (err) {
-        console.error('Error checking weather:', err)
+        console.error('[WeatherBanner] Error checking weather:', err)
       } finally {
         setLoading(false)
       }
