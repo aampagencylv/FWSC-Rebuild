@@ -28,7 +28,7 @@ export default function Directory() {
   }
 
   const filtered = useMemo(() => {
-    return MOCK_OPERATORS.filter(op => {
+    return OPERATORS.filter(op => {
       if (search && !op.name.toLowerCase().includes(search.toLowerCase())) return false
       if (county !== 'All' && op.county !== county) return false
       if (waterway !== 'All' && op.waterway !== waterway) return false
