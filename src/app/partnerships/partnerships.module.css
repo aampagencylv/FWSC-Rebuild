@@ -1,0 +1,147 @@
+.page {
+  width: 100%;
+  background-color: var(--parchment-100, #FAF6EC);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.header {
+  padding: 56px 24px;
+  background-color: var(--parchment-100, #FAF6EC);
+  border-bottom: 1px solid var(--line-300, #D8D3C4);
+}
+
+.eyebrow {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-700, #8A6A1F);
+}
+
+.header h1 {
+  margin: 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--navy-800, #14264E);
+}
+
+/* Partners section */
+.partnersSection {
+  padding: 64px 0;
+}
+
+.partnersList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.partnerCard {
+  background-color: white;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.logo {
+  flex: 0 0 64px;
+  height: 64px;
+  background-color: var(--navy-050, #EEF2F8);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo div {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+}
+
+.content h3 {
+  margin: 0 0 8px 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy-800, #14264E);
+}
+
+.content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-600, #4A5265);
+}
+
+/* CTA section */
+.ctaSection {
+  background-color: var(--navy-800, #14264E);
+  color: white;
+  padding: 56px 24px;
+  border-top: 1px solid var(--line-300, #D8D3C4);
+}
+
+.ctaSection .container {
+  text-align: center;
+}
+
+.ctaSection .eyebrow {
+  color: var(--gold-400, #E3BE6A);
+}
+
+.ctaSection h2 {
+  margin: 0 0 24px 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: white;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--gold-500, #C9A23E);
+  color: var(--navy-900, #0E1A34);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 140ms ease-out;
+}
+
+.button:hover {
+  background-color: var(--gold-600, #B89130);
+  text-decoration: none;
+}
+
+.button:active {
+  background-color: var(--gold-700, #A67E28);
+}
+
+@media (max-width: 768px) {
+  .partnerCard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,201 @@
+.page {
+  width: 100%;
+  background-color: var(--parchment-100, #FAF6EC);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.header {
+  padding: 56px 24px;
+  background-color: var(--parchment-100, #FAF6EC);
+  border-bottom: 1px solid var(--line-300, #D8D3C4);
+}
+
+.header .container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-700, #8A6A1F);
+}
+
+.header h1 {
+  margin: 0 0 8px 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--navy-800, #14264E);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-600, #4A5265);
+}
+
+/* Pillars section */
+.pillarsSection {
+  padding: 64px 0;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.pillarCard {
+  background-color: white;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-top: 3px solid var(--gold-500, #C9A23E);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pillarNumber {
+  font-family: var(--font-display, 'Marcellus', serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--gold-400, #E3BE6A);
+}
+
+.pillarCard h3 {
+  margin: 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy-800, #14264E);
+}
+
+.pillarCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-600, #4A5265);
+}
+
+/* Downloads section */
+.downloadsSection {
+  padding: 64px 0;
+  background-color: var(--parchment-100, #FAF6EC);
+}
+
+.sectionRule {
+  margin-bottom: 48px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.sectionRule h2 {
+  margin: 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--navy-800, #14264E);
+}
+
+.sectionRule::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--gold-500, #C9A23E);
+  border-bottom: 1px solid var(--line-300, #D8D3C4);
+}
+
+.downloadLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.downloadChip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: white;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--navy-800, #14264E);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 140ms ease-out;
+}
+
+.downloadChip:hover {
+  background-color: var(--navy-050, #EEF2F8);
+  border-color: var(--navy-800, #14264E);
+}
+
+.icon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CTA section */
+.ctaSection {
+  padding: 64px 0;
+  background-color: white;
+  border-top: 1px solid var(--line-300, #D8D3C4);
+}
+
+.ctaSection h2 {
+  margin: 0 0 24px 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--navy-800, #14264E);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--navy-800, #14264E);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 140ms ease-out;
+}
+
+.button:hover {
+  background-color: var(--navy-700, #1D3463);
+}
+
+.button:active {
+  background-color: var(--navy-900, #0E1A34);
+}
+
+@media (max-width: 768px) {
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .downloadLinks {
+    flex-direction: column;
+  }
+}
