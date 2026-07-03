@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { OPERATORS } from '@/lib/operators'
 import styles from './profile.module.css'
 
-export default function OperatorProfile({ params }: { params: { id: string } }) {
-  const operator = OPERATORS.find(op => op.id === parseInt(params.id))
+export default async function OperatorProfile({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const operator = OPERATORS.find(op => op.id === parseInt(id))
 
   if (!operator) {
     notFound()
