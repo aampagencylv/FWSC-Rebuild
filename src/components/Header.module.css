@@ -146,7 +146,7 @@
   .masthead {
     flex-wrap: wrap;
     padding: 12px;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
     position: relative;
   }
@@ -158,6 +158,16 @@
 
   .logo {
     order: 1;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .seal {
+    width: 48px;
+    height: 48px;
   }
 
   .cta {
