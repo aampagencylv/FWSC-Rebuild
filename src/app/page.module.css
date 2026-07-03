@@ -114,6 +114,15 @@
   font-size: 14px;
 }
 
+.heroImg {
+  width: 380px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 4px;
+  display: block;
+}
+
 /* Section rule header */
 .sectionRule {
   margin-bottom: 40px;

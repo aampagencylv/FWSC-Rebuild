@@ -23,9 +23,11 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.heroImage}>
-          <div className={styles.placeholder}>
-            Photo placeholder
-          </div>
+          <img
+            src="/hero-family-boat.jpg"
+            alt="Family enjoying a boat day on Florida waterways"
+            className={styles.heroImg}
+          />
         </div>
       </section>
 
