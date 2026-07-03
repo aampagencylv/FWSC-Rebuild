@@ -44,6 +44,167 @@
   margin: 0 auto;
 }
 
+/* Two-column layout with map */
+.twoColumnBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 56px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.mapSection {
+  height: 600px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--line-300, #D8D3C4);
+  background-color: white;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: white;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.filterRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.filterSelect {
+  padding: 8px 12px;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--navy-800, #14264E);
+  background-color: white;
+  min-height: 36px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--navy-800, #14264E);
+  box-shadow: 0 0 0 2px var(--gold-500, #C9A23E);
+}
+
+.vesselFilters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.vesselCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--navy-800, #14264E);
+  cursor: pointer;
+}
+
+.vesselCheckbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--navy-800, #14264E);
+}
+
+.listingsSection {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 500px;
+}
+
+.operatorGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.operatorGridCard {
+  background-color: white;
+  border: 1px solid var(--line-300, #D8D3C4);
+  border-radius: 4px;
+  padding: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 140ms ease-out;
+}
+
+.operatorGridCard:hover {
+  border-color: var(--navy-800, #14264E);
+  box-shadow: 0 2px 8px rgba(20, 38, 78, 0.12);
+}
+
+.gridCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.gridCardHeader h3 {
+  margin: 0;
+  font-family: var(--font-serif, 'Libre Caslon Text', serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy-800, #14264E);
+}
+
+.levelBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  background-color: var(--gold-100, #F5EDD9);
+  color: var(--gold-900, #6B4E0A);
+  white-space: nowrap;
+}
+
+.gridCardMeta {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  color: var(--ink-600, #4A5265);
+  line-height: 1.4;
+}
+
+.gridCardFooter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-200, #EAE6DE);
+}
+
+.viewLink {
+  color: var(--water-500, #4E7FBE);
+}
+
+.operatorGridCard:hover .viewLink {
+  text-decoration: underline;
+}
+
+.verified {
+  color: var(--ink-400, #7C8496);
+}
+
 /* Filter rail */
 .filterRail {
   flex: 0 0 250px;
@@ -340,6 +501,21 @@
   background-color: var(--navy-700, #1D3463);
 }
 
+@media (max-width: 1024px) {
+  .twoColumnBody {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .mapSection {
+    height: 400px;
+  }
+
+  .filterRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .body {
     flex-direction: column;
@@ -363,5 +539,23 @@
   .operatorCard {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .twoColumnBody {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px 16px;
+  }
+
+  .mapSection {
+    height: 300px;
+  }
+
+  .filterRow {
+    grid-template-columns: 1fr;
+  }
+
+  .vesselFilters {
+    gap: 8px;
   }
 }

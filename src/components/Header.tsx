@@ -10,6 +10,7 @@ const navigation = [
   { href: '/safety-framework', label: 'Safety Framework' },
   { href: '/partnerships', label: 'Partnerships' },
   { href: '/directory', label: 'Member Directory' },
+  { href: '/board', label: 'Board of Trustees' },
 ]
 
 export default function Header() {
