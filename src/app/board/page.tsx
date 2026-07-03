@@ -1,7 +1,18 @@
 'use client'
 
+import { Metadata } from 'next'
 import { useState } from 'react'
 import styles from './board.module.css'
+
+export const metadata: Metadata = {
+  title: 'Board of Trustees | Florida Water Sports Coalition',
+  description: 'Meet the experienced water sports professionals leading FWSC. Board members include certified livery operators dedicated to safety and industry advocacy.',
+  openGraph: {
+    title: 'Board of Trustees | Florida Water Sports Coalition',
+    description: 'Meet the leadership team of FWSC',
+    type: 'website',
+  },
+}
 
 interface BoardMember {
   id: number

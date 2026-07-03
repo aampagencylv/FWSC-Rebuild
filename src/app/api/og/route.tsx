@@ -82,7 +82,7 @@ export async function GET() {
                 textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
               }}
             >
-              Safer Vessels · Safer Waters
+              Safer Operators · Safer Waters
             </p>
 
             <p

@@ -37,7 +37,7 @@ export default function Header() {
           />
           <div className={styles.titleBlock}>
             <h1 className={styles.title}>FLORIDA WATER SPORTS COALITION</h1>
-            <p className={styles.subtitle}>Safer Vessels · Safer Waters</p>
+            <p className={styles.subtitle}>Safer Operators · Safer Waters</p>
           </div>
         </Link>
 

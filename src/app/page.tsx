@@ -76,6 +76,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trusted Partners */}
+      <section className={styles.partnersSection}>
+        <div className={styles.sectionRule}>
+          <p className={styles.eyebrow}>Trusted by industry leaders</p>
+          <h2>Our Partners</h2>
+        </div>
+
+        <div className={styles.partnersGrid}>
+          <div className={styles.partnerCard}>
+            <img src="/logo-granite-insurance.png" alt="Granite Insurance" className={styles.partnerLogo} />
+            <p>Granite Insurance</p>
+          </div>
+          <div className={styles.partnerCard}>
+            <img src="/logo-tmbt.jpg" alt="Take My Boat Test" className={styles.partnerLogo} />
+            <p>Take My Boat Test</p>
+          </div>
+          <div className={styles.partnerCard}>
+            <img src="/logo-fwc.jpg" alt="Florida Fish and Wildlife" className={styles.partnerLogo} />
+            <p>Florida Fish & Wildlife</p>
+          </div>
+          <div className={styles.partnerCard}>
+            <img src="/logo-nasbla.png" alt="NASBLA" className={styles.partnerLogo} />
+            <p>NASBLA</p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA band */}
       <section className={styles.ctaBand}>
         <h2>Ready to Join?</h2>

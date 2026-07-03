@@ -247,6 +247,50 @@
   color: #C8D2E4;
 }
 
+/* Trusted Partners */
+.partnersSection {
+  padding: 64px 24px;
+  background-color: white;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  align-items: center;
+  justify-items: center;
+}
+
+.partnerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.partnerLogo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(0%);
+  transition: filter 200ms ease;
+}
+
+.partnerCard:hover .partnerLogo {
+  filter: grayscale(0%);
+  opacity: 0.8;
+}
+
+.partnerCard p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy-800, #14264E);
+}
+
 /* CTA Band */
 .ctaBand {
   background-color: var(--parchment-200, #F3ECDB);
@@ -287,6 +331,11 @@
 
   .stepsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .partnersGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
   .buttons {

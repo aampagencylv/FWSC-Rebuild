@@ -1,4 +1,15 @@
+import { Metadata } from 'next'
 import styles from './partnerships.module.css'
+
+export const metadata: Metadata = {
+  title: 'Partnerships | FWSC & Government Agencies',
+  description: 'FWSC partners with Florida Fish & Wildlife, insurance providers, and licensing agencies to support safe water sports operations and industry excellence.',
+  openGraph: {
+    title: 'Partnerships | FWSC',
+    description: 'FWSC partnerships with FWC, insurers, and licensing agencies',
+    type: 'website',
+  },
+}
 
 const PARTNERS = [
   {

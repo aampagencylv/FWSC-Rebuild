@@ -1,10 +1,21 @@
 'use client'
 
+import { Metadata } from 'next'
 import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '@/components/CheckoutForm'
 import styles from './membership.module.css'
+
+export const metadata: Metadata = {
+  title: 'Membership Plans | Join FWSC',
+  description: 'Join the Florida Water Sports Coalition. Flexible pricing for operators of all sizes—from single-vessel Skippers to large Fleets. Includes safety certification and directory listing.',
+  openGraph: {
+    title: 'Membership Plans | FWSC',
+    description: 'Join FWSC with flexible membership tiers starting at $350/year',
+    type: 'website',
+  },
+}
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 

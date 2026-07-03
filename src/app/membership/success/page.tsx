@@ -1,9 +1,16 @@
 'use client'
 
+import { Metadata } from 'next'
 import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import styles from './success.module.css'
+
+export const metadata: Metadata = {
+  title: 'Welcome to FWSC | Membership Confirmed',
+  description: 'Your membership with the Florida Water Sports Coalition is now active. You can access your directory listing, safety resources, and more.',
+  robots: 'noindex',
+}
 
 function SuccessContent() {
   const searchParams = useSearchParams()

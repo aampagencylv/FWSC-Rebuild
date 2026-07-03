@@ -1,4 +1,15 @@
+import { Metadata } from 'next'
 import styles from './safety-framework.module.css'
+
+export const metadata: Metadata = {
+  title: 'Safety Framework | FWSC Standards for Water Sports',
+  description: 'The Florida Water Sports Coalition standard for safe livery operations. Comprehensive guidelines for vessel maintenance, staff training, passenger safety, and regulatory compliance.',
+  openGraph: {
+    title: 'Safety Framework | FWSC Standards',
+    description: 'Comprehensive safety standards for Florida water sports operators',
+    type: 'website',
+  },
+}
 
 const PILLARS = [
   {

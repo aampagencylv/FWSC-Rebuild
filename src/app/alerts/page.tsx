@@ -1,5 +1,16 @@
+import { Metadata } from 'next'
 import styles from './alerts.module.css'
 import { WEATHER_LOCATIONS, getWeatherEmoji } from '@/lib/weather'
+
+export const metadata: Metadata = {
+  title: 'Weather Alerts | Florida Waterways | FWSC',
+  description: 'Real-time weather alerts and conditions for Florida waterways. Current temperature, wind, and safety alerts for water sports operations.',
+  openGraph: {
+    title: 'Weather Alerts | FWSC',
+    description: 'Real-time Florida waterway weather and conditions',
+    type: 'website',
+  },
+}
 
 interface WeatherData {
   location: { name: string; county: string; waterway: string }

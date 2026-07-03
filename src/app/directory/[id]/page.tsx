@@ -1,8 +1,30 @@
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { OPERATORS } from '@/lib/operators'
 import OperatorMapWrapper from '@/components/OperatorMapWrapper'
 import styles from './profile.module.css'
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const operator = OPERATORS.find(op => op.id === parseInt(id))
+
+  if (!operator) {
+    return {
+      title: 'Operator Not Found',
+    }
+  }
+
+  return {
+    title: `${operator.name} | Certified Water Sports Operator | FWSC`,
+    description: `${operator.name} is a certified ${operator.certLevel} water sports operator in ${operator.county} County, ${operator.waterway}. Book your water sports adventure today.`,
+    openGraph: {
+      title: `${operator.name} | FWSC`,
+      description: `Certified water sports operator ${operator.name} in ${operator.county} County`,
+      type: 'website',
+    },
+  }
+}
 
 export default async function OperatorProfile({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
