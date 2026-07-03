@@ -4,9 +4,15 @@ export const runtime = 'edge'
 
 export async function GET() {
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+
     const heroImage = await fetch(
-      new URL('/hero-family-boat.jpg', 'https://fwsc.org').toString()
+      new URL('/hero-family-boat.jpg', 'https://fwsc.org').toString(),
+      { signal: controller.signal }
     ).then(res => res.arrayBuffer())
+
+    clearTimeout(timeout)
 
     return new ImageResponse(
       (
@@ -123,7 +129,7 @@ export async function GET() {
         >
           <div>FLORIDA WATER SPORTS COALITION</div>
           <div style={{ fontSize: '24px', marginTop: '20px', color: '#C9A23E' }}>
-            Safer Vessels · Safer Waters
+            Safer Operators · Safer Waters
           </div>
         </div>
       ),
