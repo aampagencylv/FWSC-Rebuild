@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from './WeatherBanner.module.css'
 
@@ -13,34 +13,38 @@ interface WeatherData {
 export default function WeatherBanner() {
   const [alerts, setAlerts] = useState<WeatherData[]>([])
   const [show, setShow] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
+  const hasRunRef = useRef(false)
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted || hasRunRef.current) return
+
+    hasRunRef.current = true
+
     const checkWeather = async () => {
       try {
-        console.log('[WeatherBanner] Fetching weather...')
-        const response = await fetch('/api/weather', { cache: 'no-store' })
+        const response = await fetch('/api/weather', { next: { revalidate: 900 } })
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         const data = await response.json()
-        console.log('[WeatherBanner] Got data:', data.length, 'locations')
         const alertData = data.filter((w: WeatherData) => w.alert)
-        console.log('[WeatherBanner] Alert locations:', alertData.length)
         setAlerts(alertData)
         setShow(alertData.length > 0)
       } catch (err) {
-        console.error('[WeatherBanner] Error checking weather:', err)
-      } finally {
-        setLoading(false)
+        console.error('Weather banner error:', err)
+        setShow(false)
       }
     }
 
     checkWeather()
-    // Check every 15 minutes
     const interval = setInterval(checkWeather, 15 * 60 * 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, [isMounted])
 
-  if (loading || !show || alerts.length === 0) {
+  if (!isMounted || !show || alerts.length === 0) {
     return null
   }
 
