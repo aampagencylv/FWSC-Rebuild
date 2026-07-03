@@ -60,7 +60,7 @@ export default function Partnerships() {
         <div className={styles.container}>
           <p className={styles.eyebrow}>Interested?</p>
           <h2>Become a partner</h2>
-          <a href="mailto:info@fwsc.org" className={styles.button}>
+          <a href="mailto:info@flwsc.org" className={styles.button}>
             Contact the coalition
           </a>
         </div>

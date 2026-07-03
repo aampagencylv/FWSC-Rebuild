@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Florida Water Sports Coalition',
     description: 'Certified water sports operators across Florida\'s waterways. Safer operators. Safer waters.',
-    url: 'https://fwsc.org',
+    url: 'https://flwsc.org',
     siteName: 'Florida Water Sports Coalition',
     images: [
       {

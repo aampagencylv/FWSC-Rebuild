@@ -8,7 +8,7 @@ export async function GET() {
     const timeout = setTimeout(() => controller.abort(), 5000)
 
     const heroImage = await fetch(
-      new URL('/hero-family-boat.jpg', 'https://fwsc.org').toString(),
+      new URL('/hero-family-boat.jpg', 'https://flwsc.org').toString(),
       { signal: controller.signal }
     ).then(res => res.arrayBuffer())
 

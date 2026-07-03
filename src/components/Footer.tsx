@@ -37,7 +37,7 @@ export default function Footer() {
             <h3>Safety</h3>
             <Link href="/safety-framework">Safety Framework</Link>
             <Link href="/partnerships">Partnerships</Link>
-            <a href="mailto:info@fwsc.org">Contact us</a>
+            <a href="mailto:info@flwsc.org">Contact us</a>
           </nav>
         </div>
       </div>
