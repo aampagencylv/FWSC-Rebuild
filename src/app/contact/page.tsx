@@ -91,6 +91,19 @@ export default function Contact() {
             </div>
 
             <div className={styles.formGroup}>
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
               <label htmlFor="phone">Phone</label>
               <input
                 type="tel"

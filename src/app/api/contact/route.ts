@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
   try {
     const data: ContactFormData = await request.json()
 
-    // Validate required fields (email is optional)
-    if (!data.name || !data.message) {
+    // Validate required fields
+    if (!data.name || !data.email || !data.message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -45,26 +45,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send confirmation email to user if email provided
-    if (data.email) {
-      const confirmationResult = await resend.emails.send({
-        from: 'Florida Water Sports Coalition <onboarding@resend.dev>',
-        to: data.email,
-        subject: 'We received your message',
-        html: `
-          <h2>Thank you, ${data.name}!</h2>
-          <p>We've received your message and will get back to you as soon as possible.</p>
-          <p>If you need immediate assistance, please call us at <strong>(305) 393-6465</strong></p>
-          <hr>
-          <p><strong>Your message:</strong></p>
-          <p>${data.message.replace(/\n/g, '<br>')}</p>
-        `,
-      })
+    // Send confirmation email to user
+    const confirmationResult = await resend.emails.send({
+      from: 'Florida Water Sports Coalition <onboarding@resend.dev>',
+      to: data.email,
+      subject: 'We received your message',
+      html: `
+        <h2>Thank you, ${data.name}!</h2>
+        <p>We've received your message and will get back to you as soon as possible.</p>
+        <p>If you need immediate assistance, please call us at <strong>(305) 393-6465</strong></p>
+        <hr>
+        <p><strong>Your message:</strong></p>
+        <p>${data.message.replace(/\n/g, '<br>')}</p>
+      `,
+    })
 
-      if (confirmationResult.error) {
-        console.error('Failed to send confirmation email:', confirmationResult.error)
-        // Don't fail the request if confirmation email fails
-      }
+    if (confirmationResult.error) {
+      console.error('Failed to send confirmation email:', confirmationResult.error)
+      // Don't fail the request if confirmation email fails
     }
 
     return NextResponse.json({
