@@ -17,13 +17,13 @@ interface BoardMember {
 const BOARD_MEMBERS: BoardMember[] = [
   {
     id: 1,
-    name: 'Captain Sarah Mitchell',
+    name: 'Captain Kevin O\'Neill',
     role: 'President & Board Chair',
-    bio: 'Sarah leads Crystal Waters Rentals on Lake Eustis with 15+ years of water sports experience.',
-    photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop',
-    linkedin: 'https://linkedin.com/in/sarah-mitchell',
-    email: 'sarah@fwscllc.com',
-    phone: '(407) 555-0142',
+    bio: 'Kevin brings extensive leadership and operational expertise to the Florida Water Sports Coalition.',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop',
+    linkedin: 'https://www.facebook.com/kevin.oneil.927',
+    email: 'kevin@flwsc.org',
+    phone: '(305) 393-6465',
   },
   {
     id: 2,
