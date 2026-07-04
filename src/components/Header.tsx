@@ -12,6 +12,7 @@ const navigation = [
   { href: '/partnerships', label: 'Partnerships' },
   { href: '/directory', label: 'Member Directory' },
   { href: '/board', label: 'Board of Trustees' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Header() {
