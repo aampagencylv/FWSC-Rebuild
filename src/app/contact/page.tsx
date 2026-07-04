@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './contact.module.css'
 
 interface FormData {
@@ -10,16 +10,42 @@ interface FormData {
   message: string
 }
 
+interface MathChallenge {
+  num1: number
+  num2: number
+  operation: string
+  answer: number
+}
+
+function generateMathChallenge(): MathChallenge {
+  const num1 = Math.floor(Math.random() * 10) + 1
+  const num2 = Math.floor(Math.random() * 10) + 1
+  const operation = ['+', '-', '*'][Math.floor(Math.random() * 3)]
+
+  let answer = 0
+  if (operation === '+') answer = num1 + num2
+  else if (operation === '-') answer = num1 - num2
+  else answer = num1 * num2
+
+  return { num1, num2, operation, answer }
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
-    email: '', // Still in state for API submission
+    email: '',
     phone: '',
     message: '',
   })
+  const [mathChallenge, setMathChallenge] = useState<MathChallenge>(generateMathChallenge())
+  const [mathAnswer, setMathAnswer] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setMathChallenge(generateMathChallenge())
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -30,6 +56,13 @@ export default function Contact() {
     e.preventDefault()
     setLoading(true)
     setError(null)
+
+    // Validate math challenge
+    if (parseInt(mathAnswer) !== mathChallenge.answer) {
+      setError('Incorrect answer. Please try again.')
+      setLoading(false)
+      return
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -43,7 +76,9 @@ export default function Contact() {
       }
 
       setSuccess(true)
-      setFormData({ name: '', email: '', phone: '', message: '' }) // Clear form but keep email in state
+      setFormData({ name: '', email: '', phone: '', message: '' })
+      setMathAnswer('')
+      setMathChallenge(generateMathChallenge())
       setTimeout(() => setSuccess(false), 5000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -125,6 +160,20 @@ export default function Contact() {
                 required
                 placeholder="Tell us what you'd like to discuss..."
                 rows={6}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="mathAnswer">
+                Verification: What is {mathChallenge.num1} {mathChallenge.operation} {mathChallenge.num2}?
+              </label>
+              <input
+                type="number"
+                id="mathAnswer"
+                value={mathAnswer}
+                onChange={(e) => setMathAnswer(e.target.value)}
+                required
+                placeholder="Your answer"
               />
             </div>
 
