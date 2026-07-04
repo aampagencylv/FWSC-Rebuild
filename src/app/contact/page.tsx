@@ -13,7 +13,7 @@ interface FormData {
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
-    email: '',
+    email: '', // Still in state for API submission
     phone: '',
     message: '',
   })
@@ -43,7 +43,7 @@ export default function Contact() {
       }
 
       setSuccess(true)
-      setFormData({ name: '', email: '', phone: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', message: '' }) // Clear form but keep email in state
       setTimeout(() => setSuccess(false), 5000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -69,14 +69,8 @@ export default function Contact() {
             <h2>Get in Touch</h2>
             <div className={styles.method}>
               <h3>Phone</h3>
-              <a href="tel:+18005551234" className={styles.link}>
-                (800) 555-1234
-              </a>
-            </div>
-            <div className={styles.method}>
-              <h3>Email</h3>
-              <a href="mailto:info@flwsc.org" className={styles.link}>
-                info@flwsc.org
+              <a href="tel:+13053936465" className={styles.link}>
+                (305) 393-6465
               </a>
             </div>
           </div>
@@ -93,19 +87,6 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 placeholder="Your name"
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="your@email.com"
               />
             </div>
 
