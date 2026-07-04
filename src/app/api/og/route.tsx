@@ -7,8 +7,11 @@ export async function GET() {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 5000)
 
+    // Use VERCEL_URL for reliable image fetching on Vercel deployment
+    const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://flwsc.org'
+
     const heroImage = await fetch(
-      new URL('/hero-family-boat.jpg', 'https://flwsc.org').toString(),
+      new URL('/hero-family-boat.jpg', vercelUrl).toString(),
       { signal: controller.signal }
     ).then(res => res.arrayBuffer())
 
